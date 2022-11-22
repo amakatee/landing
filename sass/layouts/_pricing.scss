@@ -1,0 +1,51 @@
+.pricing-swiper {
+    min-height: 60vh;
+
+
+    .pricing-swiper-box {
+        color: #434343;
+     
+        width: 100%;
+        aspect-ratio: 1/1.4;
+        display: grid;
+        place-content: center;
+
+
+        .pricing-card {
+            width: 20rem;
+           aspect-ratio: 1/1.4;
+        
+            box-shadow: 0 8px 24px hsl(210deg 8% 62% / 20%);
+            cursor: pointer;
+            padding: 10% 15%;
+            aspect-ratio: 1/1.4;
+            border-radius: 10px;
+            text-align: center;
+     
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+
+            .card-price {
+                font-size: .8rem;
+                letter-spacing: .1px;
+                line-height: 1.9rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+   
+    }
+}
+
+.arrows-pricing {
+    display: flex;
+    margin-top: 0rem;
+ 
+    text-align: center;
+    gap: .9rem;
+   justify-content: center ; 
+}
+
+

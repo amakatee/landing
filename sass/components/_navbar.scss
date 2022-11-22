@@ -1,0 +1,65 @@
+$typografydark: #17263b;
+
+nav {
+    display: flex;
+    padding-inline: 1rem;
+    padding-block: .7rem;
+    min-height: 8vh;
+    align-items: center;
+    gap: 1rem;
+    position: fixed;
+    z-index: 10;
+    background-color: white;
+    width: 100%;
+    box-shadow: 0 8px 24px hsl(210deg 8% 62% / 20%);
+
+    justify-content: space-between;
+    // grid-template-columns: 2fr 1fr 1fr;
+
+    :nth-child(3) {
+        order:1;
+        margin-left: auto;
+     
+       
+     
+    }
+    :nth-child(2) {
+        order:2;
+       
+ 
+    }
+     .logo {
+        color: $typografydark;
+     }
+    
+
+    .nav-options {
+        display: flex;
+        list-style: none;
+        display: none;
+
+        
+        
+    
+    }
+    .burger {
+    
+        display: flex;
+        flex-direction: column;
+        gap: .15rem;
+        cursor: pointer;
+      
+        
+        .line {
+            width: 1.8rem;
+            height: 2px;
+            background-color: $typografydark;
+
+        }
+        
+    }
+
+    
+
+}
+

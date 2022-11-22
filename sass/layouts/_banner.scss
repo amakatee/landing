@@ -1,0 +1,55 @@
+$typografydark: #17263b;
+$babyblue: #63A4FF;
+
+.banner-img {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+    }
+   
+
+}
+
+.banner-text {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form {
+    display: flex;
+    justify-content: space-around;
+    
+
+
+
+
+
+  
+
+    p {
+        margin-bottom: .5rem;
+    }
+    .banner-input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid $typografydark;
+        outline: none;
+        padding: .5em 1em;
+        font-size: 1rem;
+      
+
+
+    }
+}
+

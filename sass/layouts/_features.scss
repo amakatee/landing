@@ -1,0 +1,40 @@
+.features-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+   
+
+    .features {
+        padding-block: 5rem;
+        width: 100%;
+        min-height: 80vh;
+
+        background: linear-gradient(45deg, #83EAF1, #63A4FF);
+        display: flex;
+       flex-wrap: wrap;
+
+       align-items: center;
+       justify-content: space-around;
+       gap: 4rem;
+       width: 100%;
+
+       .features-box {
+        display: flex;
+        flex-direction: column;
+ 
+        padding-left:  1.5em;
+       
+        
+        justify-content: space-around;
+ 
+       width: 300px;
+       aspect-ratio: 1/.3;
+
+
+       }
+
+ 
+    }
+}
+

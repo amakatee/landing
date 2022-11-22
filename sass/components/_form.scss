@@ -1,0 +1,63 @@
+.contact-form {
+    display: flex;
+    max-width:20rem;
+    margin: auto;
+    min-height: 40vh;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 1.2rem;
+    box-shadow: 0 8px 24px hsl(210deg 8% 62% / 20%);
+    padding-block: 2rem;
+    border-radius: 20px;
+
+    .contact-input {
+        width: 17rem;
+        padding: .8em 1.3em;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+
+        border: 1px solid lightgrey;
+
+        font-size: 1rem;
+      
+    }
+    .contact-btn {
+        background-color: transparent;
+        padding: 1em 3rem;
+        font-size: .9rem;
+      
+
+        :hover {
+            
+           
+        }
+
+
+    }
+   
+
+}
+
+
+
+
+.check-field {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+
+    width: 17rem;
+    gap: .5rem;
+    
+    input {
+      
+    }
+
+    p {
+        margin-bottom: .3px;
+        
+    }
+}

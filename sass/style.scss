@@ -1,0 +1,57 @@
+@import "./layouts/first";
+@import "./layouts/banner";
+@import "./layouts/features";
+@import "./layouts/workflow";
+@import "./layouts/pricing";
+@import "./layouts/contact";
+@import "./layouts/admin";
+
+@import "./components/navbar";
+@import "./components/button";
+@import "./components/headers";
+@import "./components/form";
+
+@import "./typography/fonts";
+
+$mainblue: "#1b2845";
+$lightblue: #77d2d2;
+// $darkback:#0c171b; 
+$typografydark: #17263b;
+$babyblue: #63A4FF;
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-family: Helvetica Neue;
+    background-color: white ;
+    color: $typografydark;
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+
+  .layout {
+    display: flex;
+    gap: 5rem;
+    flex-direction: column;
+    
+}
+
+
+.footer {
+    display: grid;
+    place-content: center;
+    width: 100%;
+    min-height: 8vh;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}
