@@ -1,9 +1,10 @@
 import React from 'react'
 import Button from '../Button'
-const Navbar = ({btnText}) => {
+const Navbar = ({logo, btnText, list}) => {
+  console.log(logo)
   return (
     <nav>
-      <h2 className='logo h2text'>SFC</h2>
+      <h2 className='logo h2text'>{logo}</h2>
 
       <div>
       <ul className='nav-options'>
@@ -17,7 +18,7 @@ const Navbar = ({btnText}) => {
         <div className='line'></div>
       </div>
       </div>
-      <Button btnText='contact us' />
+      <Button btnText={btnText} />
     </nav>
   )
 }

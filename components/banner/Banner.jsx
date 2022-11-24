@@ -5,7 +5,7 @@ const Banner = ({img, firstText,  formText, btnText}) => {
   return (
     <main>
         <div className='banner-img'>
-            <img src={img} />
+            <img src={img ? img : 'plane.jpeg'} />
         </div>
         <div className='banner-text'>
             <h2 className='bigText'>{firstText}</h2>

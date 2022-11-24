@@ -50,6 +50,7 @@
         text-transform: uppercase;
         border-radius: 10px;
         font-size: 1rem;
+        cursor: pointer;
      }
 
      .admin-boxes {
@@ -66,6 +67,7 @@
              margin: auto;
              width: 15rem;
              aspect-ratio: 1/.7;
+             cursor: pointer;
              background-color: #1cb7f560;
              border-radius: 10px;
              backdrop-filter: 1rem;
@@ -79,3 +81,18 @@
 
      }
  }
+
+ .admin-window{
+     position: absolute;
+     width: 100vw;
+     min-height: 100vh;
+     background-color: #a1aec93c;
+     color: white;
+   
+
+ }
+
+ .click {
+     color: white;
+ }
+

@@ -7,33 +7,33 @@ import Layout from '../components/Layout'
 import WorkFlow from '../components/workflow/WorkFlow'
 import Pricing from '../components/pricing/Pricing'
 import Contact from '../components/contact/Contact'
+import { getBannerData, getNavbarData , getWorkflowData, getFeaturesData} from '../fetchData/fetchingData'
 
-const BannerData = {
-  img:'plane.jpeg',
-  firstText:'Доставка из Китая от 1 кг. Быстро. Надёжно. Удобно',
-  formText:"email",
-  btnText:"submit"
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import Navbar from '../components/navbar/Navbar'
 
+
+// export const getBannerData = async () => {
+//   const res = await axios.get('http://localhost:3000/api/banner')
+//   console.log(res.data[0])
+//   return res.data[0]
+
+// }
+export async  function getStaticProps() {
+  const queryClient = new QueryClient()
+  const navbarData = await getNavbarData()
+  const bannerData = await getBannerData()
+  const workflowData = await getWorkflowData()
+  const featuresData = await getFeaturesData()
+
+// await queryClient.prefetchQuery(['banner'], getBannerData)
+  return {
+    props: { bannerData, navbarData, workflowData, featuresData}
+  }
 }
 
-const WorkFlowData = {
-  headerText: "Work Flow",
-  boxes: [
-    {
-      img: "some",
-      text: 'Много лет организовываем доставку товаров и грузов при сотрудничестве больше, чем со 100 компаниями;'
-    },
-    {
-      img: "some",
-      text: 'перевозчиками, мы способны предложить клиентам оптимальные цены за доставку , которая не сравнима по стоимости с т'
-    },
-    {
-      img: "some",
-      text: 'перевозчиками, мы способны предложить клиентам оптимальные цены за доставку , которая не сравнима по стоимости с т'
-    },
-    
-  ]
-}
+
+
 
 const FeaturesData = {
   headerText:"Features",
@@ -86,12 +86,45 @@ const contactData = {
   }
 }
 
-export default function Home() {
+export default function Home(props) {
+
+  const {data:NavbarData} = useQuery({
+    queryKey:['navbar'],
+    queryFn: getNavbarData,
+    initialData:props.navbarData
+
+  })
+ 
+  const {data:BannerData} = useQuery({
+    queryKey:['banner'],
+    queryFn: getBannerData,
+    initialData:props.bannerData
+
+  })
+  const {data:WorkFlowData} = useQuery({
+    queryKey:['workflow'],
+    queryFn: getWorkflowData,
+    initialData:props.workflowData
+
+  })
+  const {data:FeaturesData} = useQuery({
+    queryKey:['features'],
+    queryFn: getFeaturesData,
+    initialData:props.featuresData
+
+  })
+   console.log(FeaturesData)
+
+ 
+
+  
+   
   return (
-    <Layout>
-      <Banner img={BannerData.img} firstText={BannerData.firstText} formText={BannerData.formText} btnText={BannerData.btnText} />
-      <WorkFlow headerText={WorkFlowData.headerText} boxes={WorkFlowData.boxes}/>
-      <KeyFeature headerText={FeaturesData.headerText}  boxes={FeaturesData.boxes}/>
+    <Layout  >
+      <Navbar logo={NavbarData?.logo} list={NavbarData?.list} btnText={NavbarData?.btnText}/>
+      <Banner img={BannerData?.img} firstText={BannerData?.firstText} formText={BannerData?.formText} btnText={BannerData?.btnText} />
+      <WorkFlow headerText={WorkFlowData?.headerText} boxes={WorkFlowData?.boxes}/>
+      <KeyFeature headerText={FeaturesData?.headerText}  boxes={FeaturesData?.boxes}/>
       <Pricing boxes={pricingData.box} headerText={pricingData.headerText}/>
       <Contact headerText={contactData.headerText} formData={contactData.formData} />
     </Layout>

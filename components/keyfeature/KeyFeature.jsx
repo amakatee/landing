@@ -6,7 +6,7 @@ const KeyFeature = ({headerText, boxes}) => {
     <main className='features-main'>
        <SectionHeader headerText={headerText}/>
         <div className='features'>
-          {boxes.map((box, i) => (
+          {boxes?.map((box, i) => (
              <div key={i} className='features-box'> 
                
              <h4 className='featureh4-text'>{box.headerText}</h4>
