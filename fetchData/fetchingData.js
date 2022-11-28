@@ -38,14 +38,12 @@ export const updatetBannerData = async (data) => {
 //workflow  
 export const getWorkflowData = async () => {
     const res = await axiosBase.get(`/workflow`)
-    console.log(res.data[0])
     return res.data[0]
   
   }
 
   export const updatedWorkflowData = async (data) => {
     const res = await axiosBase.patch(`/workflow`, data)
-    console.log(res.data[0])
     return res.data[0]
   
   }
@@ -53,7 +51,6 @@ export const getWorkflowData = async () => {
 //features
 export const getFeaturesData = async () => {
   const res = await axiosBase.get(`/features`)
-  console.log(res.data[0])
   return res.data[0]
 
 }
@@ -61,6 +58,32 @@ export const updatedFeaturesData = async (data) => {
   const res = await axiosBase.patch(`/features`, data)
   console.log(data)
   console.log(res.data[0])
+  return res.data[0]
+
+}
+
+
+//Pricing
+export const getPricingData = async () => {
+  const res = await axiosBase.get(`/pricing`)
+  return res.data[0]
+
+}
+export const updatedPricingData = async (data) => {
+  const res = await axiosBase.patch(`/pricing`, data)
+  return res.data[0]
+
+}
+
+//Contact
+
+export const getContactData = async () => {
+  const res = await axiosBase.get(`/contact`)
+  return res.data[0]
+
+}
+export const updatedContactData = async (data) => {
+  const res = await axiosBase.patch(`/contact`, data)
   return res.data[0]
 
 }

@@ -8,7 +8,11 @@ import {
    getWorkflowData,
    updatedWorkflowData,
    getFeaturesData,
-   updatedFeaturesData
+   updatedFeaturesData,
+   getPricingData,
+   updatedPricingData,
+   getContactData,
+   updatedContactData
 } from '../../fetchData/fetchingData'
 import { QueryClient } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
@@ -56,6 +60,19 @@ const index = (props) => {
     initialData:props.featuresData
 
   })
+  const {data: PricingData} = useQuery({
+    queryKey:['pricing'],
+    queryFn: getPricingData,
+    initialData:props.pricingData
+
+  })
+
+  const {data: ContactData} = useQuery({
+    queryKey:['contact'],
+    queryFn: getContactData,
+    initialData:props.ContactData
+
+  })
 
   
   const {mutate:updateBanner} = useMutation(updatetBannerData, {
@@ -77,6 +94,16 @@ const index = (props) => {
   const {mutate:updateFeatures} = useMutation(updatedFeaturesData, {
     onSuccess: (data) => {
       queryClient.setQueriesData(['features', FeaturesData.id], data)
+    }
+  })
+  const {mutate:updatePricing} = useMutation(updatedPricingData, {
+    onSuccess: (data) => {
+      queryClient.setQueriesData(['pricing', PricingData.id], data)
+    }
+  })
+  const {mutate:updateContact} = useMutation(updatedContactData, {
+    onSuccess: (data) => {
+      queryClient.setQueriesData(['contact', ContactData.id], data)
     }
   })
 
@@ -119,6 +146,10 @@ const index = (props) => {
             updateWorkflow={updateWorkflow}
             featuresData={FeaturesData}
             updateFeatures={updateFeatures}
+            pricingData={PricingData}
+            updatePricing={updatePricing}
+            contactData={ContactData}
+            updateContact={updateContact}
             
          
 

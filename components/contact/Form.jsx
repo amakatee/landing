@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 
-const Form = () => {
+const Form = ({formData}) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [check, setCheck ] = useState(false)
   const [err, setErr] = useState('')
   const [success, setSuccess] = useState('')
+  console.log(formData)
 
   const getUserData = (e) => {
     e.preventDefault()
@@ -31,7 +32,7 @@ const Form = () => {
     <form onSubmit={getUserData} className='contact-form'>
       {err && <div>{err}</div>}
       {success && <div>{success}</div>}
-      <label> <p>Name:</p>
+      <label> <p>{formData[0].firstInput}:</p>
         <input
         type='text'
         value={name}
@@ -39,7 +40,7 @@ const Form = () => {
         onChange={e => setName(e.target.value)}
          />
       </label>
-      <label> <p>Email:</p>
+      <label> <p>{formData[0].secondInput}:</p>
          <input
          className='contact-input '
           type='text'
@@ -48,7 +49,7 @@ const Form = () => {
           />
       </label>
 
-      <label><p>Message:</p>
+      <label><p>{formData[0].thirdInput}</p>
          <textarea
          className='contact-input '
          type='text'
@@ -63,10 +64,10 @@ const Form = () => {
         onChange={e => setCheck(e.target.checked)}
         />
       
-         <p>Agree with confidentials</p>
+         <p>{formData[0].credentialsInput}</p>
       </label>
       
-      <button className='nav-btn contact-btn' type='submit'>Send</button>
+      <button className='nav-btn contact-btn' type='submit'>{formData[0].btnText}</button>
       
       
     </form>

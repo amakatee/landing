@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {GrClose} from 'react-icons/gr'
 import { updateNavbarData } from '../../fetchData/fetchingData'
 import NavbarForm from './NavbarForm'
@@ -12,8 +12,12 @@ const Editingpage = ({
     updateBanner,
     workflowData,
     updateWorkflow,
-     featuresData,
-    updateFeatures
+    featuresData,
+    updateFeatures,
+    pricingData,
+    updatePricing,
+    contactData,
+    updateContact
 
 
     }) => {
@@ -22,91 +26,130 @@ const Editingpage = ({
     const [ updatedBannerData, setUpdatedBannerData] = useState(bannerData)
     const [ updatedWorkflowData, setUpdateWorkflowData] = useState(workflowData)
     const [updatedFeaturesData, setUpdatedFeaturesData] = useState(featuresData)
+    const [updatedPricingData, setUpdatedPricingData] = useState(pricingData)
+    const [updatedContactData, setUpdatedContactData] = useState(contactData)
+    
    
-   
+ 
    
     const [list, setList] = useState(updatdetNavData.list)
     const [workflowBoxes, setWorkflowBoxes] = useState(updatedWorkflowData.boxes)
     const [featuresBoxes, setFeaturesBoxes] = useState(updatedFeaturesData.boxes)
+    const [pricingBoxes, setPricingBoxes] = useState(updatedPricingData.boxes)
+    const [contactBoxes, setContactBoxes] = useState(updatedContactData.formData)
 
 
 
-  //helpers
-    const handleNavbarInput = (e, index) => {
-        const newItem = list.map((item, i) => {
-            return i === index ? e.target.value : item
-        })
-        setList(newItem)
-
-    }
-
-    const handleWorkflowText = (e, index) => {
-        const newItem = workflowBoxes.map((box, i) => {
-           
-            return i === index ? {...box, text:e.target.value}  : box
-        })
-        setWorkflowBoxes(newItem)
-    }
-
-    const handleFeaturesHeader = (e, index) => {
+   //helpers
+    const addInputField = (el, elSetter,  updatedArr, updatedArrSetter) => {
+        if(updatedArr?.list) {
+            const arr =[...el, '']
+            elSetter(arr)
+            console.log(arr)
         
-        const newItem = featuresBoxes.map((box, i) => {
-           return i === index ? {...box, headerText:e.target.value}  : box
-        })
-        setFeaturesBoxes(newItem)
+            updatedArrSetter(prev => ({...prev, list:arr}))
+            console.log(updatdetNavData)
+            return
+
+        }
+        const list =  [...el, {}]
+        elSetter(list)
+        updatedArrSetter(prev => ({...prev,  boxes:list}))
+   }
+
+   const addListInput = (el, elSetter,  updatedArr, updatedArrSetter) => {
+  //  list, setList, updatdetNavData, setUpdatedNavData)
+  const arr =[...el, '']
+  elSetter(arr)
+  console.log(list)
+  updatedArrSetter(prev => ({...prev, list:arr}))
+  console.log(updatedArr)
+
+   }
+ //index, featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData
+    const removeInput = (index, el, elSetter, updatedArr, updatedArrSetter) => {
+        if(updatedArr?.list) {
+           const arr = [...el]
+           arr.splice(index, 1)
+           elSetter(arr)
+           updatedArrSetter(prev => ({...prev,  list:arr}))
+           console.log( updatedArr)
+           return
+
+        }
+        const list = [...el]
+        list.splice(index, 1)
+        elSetter(list)
+        updatedArrSetter(prev => ({...prev,  boxes:list}))
+        console.log( featuresBoxes ,updatedArr)
+
+
+
+   
     }
 
-    const handleFeaturesText = (e, index) => {
-        const newItem = featuresBoxes.map((box, i) => {
-            return i === index ? {...box, text:e.target.value} : box
-        })
-        setFeaturesBoxes(newItem)
+    const handleArrayData = (e, index, el, elSetter) => {
+        const {name, value} = e.target
+        if(!index) {
+            const list = {...el}
+            list[name]=value
+            console.log(list)
+            elSetter(list)
+            return
+        }
+        const list = [...el]
+        if(!name ) {
+            list[index] = value
+            elSetter(list)
+            console.log(list)
+            return
+        }
+        list[index][name]=value
+        console.log(list, value)
+        elSetter(list)
     }
 
-    // const handleArrayData = (e, index, val, el, elSetter) => {
-    //     const newItem = el.map((box, i) => {
-    //         return i === index ? {...box, val:e.target.value}  : box
-    //      })
-    //      elSetter(newItem)
+    const handleArrayText =(e, index, el ,elSetter) => {
+        const {name, value} = e.target
+        const list = [...el]
+        if(!name ) {
+            list[index] = value
+            elSetter(list)
+            console.log(list)
+            return
+        }
+      
+        
+        console.log(index,name, value)
+        
+     
+        list[index][name] = value
+        console.log(list)
+        elSetter(list)
 
 
-    // }
+    }
 
-    //helpers ends
-    
+
+
+    //mutating sections
     const saveNavbar =  e => {
         e.preventDefault()
         setUpdatedNavData({...updatdetNavData ,list})
-        console.log(updatdetNavData)
         updateNavbar(updatdetNavData)
-        
-
     }
+   
+ 
 
-
-    const saveBanner = e => {
+    const mutateData = (e, mutateFunc, updatedData) => {
         e.preventDefault()
-       updateBanner(updatedBannerData)
-    }
+        console.log(updatedData)
+        mutateFunc(updatedData)
+}
 
+  
 
-    const saveWorkflow = (e) => {
-        e.preventDefault()
-        console.log(workflowBoxes)
-        setUpdateWorkflowData({...updatedWorkflowData, boxes:workflowBoxes})
-        updateWorkflow(updatedWorkflowData)
-       
-       
-
-    }
-    const saveFeatures = (e) => {
-        e.preventDefault()
-        setUpdatedFeaturesData({...updatedFeaturesData, boxes:featuresBoxes})
-        updateFeatures(updatedFeaturesData)
-
-    }
-
-    
+  
 
   
     
@@ -127,68 +170,61 @@ const Editingpage = ({
                  /> */}
 
                  {/* //NAVBAR */}
-                <form className='edit-navbar' onSubmit={saveNavbar}>
+                <form className='edit-navbar' onSubmit={e => mutateData(e, updateNavbar, updatdetNavData)}>
                     <h1>navbar</h1>
                     <input
+                    name='logo'
                     type='text'
                     value={updatdetNavData.logo}
-                    onChange={e => setUpdatedNavData({...updatdetNavData, logo:e.target.value })}
+                    onChange={(e) => handleArrayData(e, null, updatdetNavData, setUpdatedNavData)}
                      />
                      <input
+                    name='btnText'
                     type='text'
                     value={updatdetNavData.btnText}
-                    onChange={e => setUpdatedNavData({...updatdetNavData, btnText:e.target.value })}
+                    onChange={(e) => handleArrayData(e, null, updatdetNavData, setUpdatedNavData)}
                      />
                        <button
-                        onClick={() => {
-                            setList([...list, ''])}}>add</button>
+                        onClick={() => addInputField(list, setList, updatdetNavData, setUpdatedNavData)}>add</button>
                      {list?.map((item, index) => {
                          return (
-                         
                             <div key={index}>
-                           <input
-                             name="navVal" 
+                            <input
                              value={item}
                              type="text"
+                             onChange={e => handleArrayText(e, index,list, setList )}
 
-                            onChange={e => handleNavbarInput(e, index)}
                              />
-                             <button onClick={() => {
-                                 const newArr = list.filter((l, i) => {
-                                     return index !== i
-                                 })
-                                setList(newArr)
-                             }}>delete</button>
+                       
+                             <button onClick={() => removeInput(index ,list, setList, updatdetNavData, setUpdatedNavData)}>delete</button>
                             
                              </div>
-                             
-                           
-                             
-                            
-                         )
+                        )
                      })}
                      <button type="submit">save navbar</button>
 
                 </form>
 
                 {/* BUNNER */}
-                <form className='edit-banner' onClick={saveBanner}>
+                <form className='edit-banner' onClick={e => mutateData(e, updateBanner, updatedBannerData)}>
                     <h1>banner</h1>
                     <textarea
-              
+                    name='firstText'
                     type='text'
-                    onChange={(e) => setUpdatedBannerData({...updatedBannerData,firstText:e.target.value})}
+                    onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
                     value={updatedBannerData.firstText}
                     />
                     <textarea
+                    name='secondText'
                     type='text'
-                    onChange={e => setUpdatedBannerData({...updatedBannerData,secondText:e.target.value})}
+                    onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
                     value={updatedBannerData.secondText}
 
                      />
                      <input
+                    name='btnText'
                     type='text'
-                    onChange={e => setUpdatedBannerData({...updatedBannerData,btnText:e.target.value})}
+                    onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
                     value={updatedBannerData.btnText}
 
                      />
@@ -196,31 +232,28 @@ const Editingpage = ({
                 </form>
 
                 {/* WORKFLOW */}
-                <form className='edit-workflow' onClick={saveWorkflow}>
+                <form className='edit-workflow' onClick={(e) =>mutateData(e, updateWorkflow, updatedWorkflowData)}>
                     <h1>workflow</h1>
                     <input 
+                    name='headerText'
                     type='text'
                     value={updatedWorkflowData.headerText}
-                    onChange={(e) => setUpdateWorkflowData({...updatedWorkflowData, headerText:e.target.value})}
+                    onChange={(e) => handleArrayData(e, null, updatedWorkflowData, setUpdateWorkflowData)}
                     />
-                    <button onClick={() => {
-                       setWorkflowBoxes([...workflowBoxes, ''])
-                    }}>Add Box Data</button>
-                    {workflowBoxes.map((box, index) => {
+
+                    <button onClick={() => addInputField(workflowBoxes, setWorkflowBoxes,updatedWorkflowData, setUpdateWorkflowData)}>Add Box Data</button>
+                    {workflowBoxes?.map((box, index) => {
+                 
                         return (
                             <div key={index}>
                                 <textarea 
+                                name='text'
                                 type="text"
                                 value={box.text}
-                                onChange={(e) => handleWorkflowText(e, index)}
-                              
+                                onChange={e => handleArrayText(e, index,workflowBoxes, setWorkflowBoxes )}
                                 />
-                                <button onClick={() => {
-                                 const newArr = workflowBoxes.filter((b, i) => {
-                                     return index !== i
-                                 })
-                                setWorkflowBoxes(newArr)
-                             }}>delete</button>
+                                <button onClick={() => removeInput(index, workflowBoxes, setWorkflowBoxes, updatedWorkflowData, setUpdateWorkflowData)}
+                                >delete</button>
                         </div>
                         )
                     })}
@@ -229,38 +262,36 @@ const Editingpage = ({
 
 
                 {/* FEATURES */}
-                <form className='edit-features' onClick={saveFeatures}>
+                <form className='edit-features' onClick={e => mutateData(e, updateFeatures, updatedFeaturesData)}>
                     <h1>Features Field</h1>
                     <input 
+                    name='headerText'
                     type='text'
                     value={updatedFeaturesData.headerText}
-                    onChange={(e) => setUpdatedFeaturesData({...updatedFeaturesData, headerText: e.target.value})}
-                    
+                    onChange={e => handleArrayData(e, null, updatedFeaturesData, setUpdatedFeaturesData)}                    
                     />
-                    <button onClick={() => {
-                        return setFeaturesBoxes([...featuresBoxes, ''])
-                    }}>Add new Feature</button>
+
+                    <button onClick={() => addInputField(featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData)}>Add new Feature</button>
                     {featuresBoxes.map((box, index) => {
                         return (
-                            <div className='boxes-cont'>
-                                 <div key={index}>
+                            <div  key={index} className='boxes-cont'>
+                                 <div>
                                 <input
+                                name='headerText'
                                 type='text'
                                 value={box.headerText}
-                                onChange={(e) => handleFeaturesHeader(e, index)}
+                                onChange={e => handleArrayText(e, index, featuresBoxes, setFeaturesBoxes)}
 
                                  />
                                  <textarea
+                                 name='text'
                                  type='text'
                                  value={box.text}
-                                 onChange={(e) => handleFeaturesText(e, index)}
+                                 onChange={(e) => handleArrayText(e, index, featuresBoxes, setFeaturesBoxes)}
                                   />
-                                  <button onClick={() => {
-                                      const newArr = featuresBoxes.filter((box, i) => {
-                                          return index !== i 
-                                      })
-                                      setFeaturesBoxes(newArr)
-                                  }}>Delete</button>
+                                   <button onClick={() => removeInput(index, featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData)}
+                                >delete</button>
+                                
                             </div>
                             </div>
                            
@@ -268,6 +299,59 @@ const Editingpage = ({
                     })}
                     
                     <button type="submit">Save Features</button>
+
+                </form>
+
+                {/* PRICING */}
+                <form className='edit-pricing' onSubmit={(e) => mutateData(e, updatePricing, updatedPricingData)}>
+                    <h1>Pricing Field</h1>
+                    <input
+                    name='headerText'
+                    type='text'
+                    value={updatedPricingData.headerText}
+                    
+                    onChange={e => handleArrayData(e, null, updatedPricingData, setUpdatedPricingData)} 
+                     />
+                     <button onClick={() => addInputField(pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Add new Pricing</button>
+                     {pricingBoxes.map((box, index) => (
+                         <div>
+                             <label> first Text
+                             <textarea
+                             name='firstText'
+                             type='text'
+                             value={box.firstText}
+                             onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
+                              />
+                              </label>
+                              <label> second Text
+                             <textarea
+                             name='secondText'
+                             type='text'
+                             value={box.secondText}
+                             onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
+                              />
+                              </label>
+                              <label> third Text
+                             <textarea
+                             name='thirdText'
+                             type='text'
+                             value={box.thirdText}
+                             onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
+                              />
+                              </label>
+                              <label> fourthText 
+                             <textarea
+                             name='fourthText'
+                             type='text'
+                             value={box.fourthText}
+                             onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
+                              />
+                              </label>
+                              <button onClick={() => removeInput(index,pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Delete</button>
+                         </div>
+                     ))}
+
+                    <button type='submit'>Submit Pricign Data</button>
 
                 </form>
             </main>

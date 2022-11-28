@@ -5,8 +5,8 @@ import SectionHeader from '../SectionHeader'
 const Contact = ({headerText, formData}) => {
   return (
     <main className='contact-section'>
-        <SectionHeader headerText="hello" />
-        <Form />
+        <SectionHeader headerText={headerText} />
+        <Form formData={formData} />
        
     </main>
   )

@@ -7,7 +7,15 @@ import Layout from '../components/Layout'
 import WorkFlow from '../components/workflow/WorkFlow'
 import Pricing from '../components/pricing/Pricing'
 import Contact from '../components/contact/Contact'
-import { getBannerData, getNavbarData , getWorkflowData, getFeaturesData} from '../fetchData/fetchingData'
+import { 
+  getBannerData,
+  getNavbarData, 
+  getWorkflowData,
+  getFeaturesData,
+  getPricingData,
+  getContactData
+
+} from '../fetchData/fetchingData'
 
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import Navbar from '../components/navbar/Navbar'
@@ -25,36 +33,25 @@ export async  function getStaticProps() {
   const bannerData = await getBannerData()
   const workflowData = await getWorkflowData()
   const featuresData = await getFeaturesData()
+  const pricingData = await getPricingData()
+  const contactData = await getContactData()
 
 // await queryClient.prefetchQuery(['banner'], getBannerData)
   return {
-    props: { bannerData, navbarData, workflowData, featuresData}
+    props: { 
+      bannerData, 
+      navbarData, 
+      workflowData, 
+      featuresData,
+      pricingData,
+      contactData
+    }
   }
 }
 
 
 
 
-const FeaturesData = {
-  headerText:"Features",
-   boxes: [
-     {
-      img: "some",
-      headerText:"Предоставим услуги по эк",
-      text: "Предоставим услуги по экспедированию грузов по схеме «дверь» - «дверь», выполним необходимые операции в рамках перевозки и передадим товар под роспись грузополучателю в указанном пункте доставки;"
-     },
-     {
-      img: "some",
-      headerText:"Предоставим услуги по эк",
-      text: "Пхеме «дверь» - «дверь», выполним необходимые операции в рамках перевозки и передадим товар под роспись грузополучателю в указанном пункте доставки;"
-     },
-     {
-      img: "some",
-      headerText:"Предоставим услуги по эк",
-      text: "Предоставим услуги по экспедированию грузов по схеме «дверь» - «дверь», выполним необходимые операции в рамках перевозки и передадим товар под роспись грузополучателю в указанном пункте доставки;"
-     }
-   ]
-}
 
 const pricingData = {
   headerText: 'pricing',
@@ -70,10 +67,7 @@ const pricingData = {
   secondText:'Доставка грузов из Китая',
   thirdText: 'Доставка грузов из Китая   ',
   fourthText: 'Автогрузоперевозки'
-    }
-
-  ]
-  
+    }]
 }
 
 const contactData = {
@@ -113,7 +107,22 @@ export default function Home(props) {
     initialData:props.featuresData
 
   })
-   console.log(FeaturesData)
+  const {data:pricingData} = useQuery({
+    queryKey:['pricing'],
+    queryFn: getPricingData,
+    initialData:props.pricingData
+
+  })
+
+  const {data:contactData} = useQuery({
+    queryKey:['contact'],
+    queryFn: getContactData,
+    initialData:props.contactData
+
+  })
+  console.log(contactData)
+ 
+ 
 
  
 
@@ -125,8 +134,8 @@ export default function Home(props) {
       <Banner img={BannerData?.img} firstText={BannerData?.firstText} formText={BannerData?.formText} btnText={BannerData?.btnText} />
       <WorkFlow headerText={WorkFlowData?.headerText} boxes={WorkFlowData?.boxes}/>
       <KeyFeature headerText={FeaturesData?.headerText}  boxes={FeaturesData?.boxes}/>
-      <Pricing boxes={pricingData.box} headerText={pricingData.headerText}/>
-      <Contact headerText={contactData.headerText} formData={contactData.formData} />
+      <Pricing boxes={pricingData?.boxes} headerText={pricingData?.headerText}/>
+      <Contact headerText={contactData?.headerText} formData={contactData?.formData} />
     </Layout>
   )
 }

@@ -45,4 +45,10 @@
             flex-direction: column;
         }
     }
+
+    .edit-pricing {
+        display: flex;
+        flex-direction: column;
+        min-height: 40vh;
+    }
 }

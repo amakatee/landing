@@ -11,7 +11,7 @@ const Pricing = ({boxes, headerText}) => {
   const swiperRef = useRef(null)
   return (
     <main>
-      <SectionHeader headerText='Pricing'/>
+      <SectionHeader headerText={headerText}/>
       <div className='pricing-swiper'>
         <Swiper 
         ref={swiperRef}
@@ -24,7 +24,7 @@ const Pricing = ({boxes, headerText}) => {
           }}
         >
 
-          {boxes.map(box => (
+          {boxes?.map(box => (
                <SwiperSlide>
                <div className='pricing-swiper-box'>
                  <div className='pricing-card'>

@@ -8,11 +8,11 @@ const Navbar = ({logo, btnText, list}) => {
 
       <div>
       <ul className='nav-options'>
-        <li>Home</li>
-        <li>Contact</li>
-        <li>Abouts Us</li>
+        {list.map((item, i) => (
+            <li key={i}>{item}</li>
 
-      </ul>
+        ))}
+     </ul>
       <div className='burger'>
         <div className='line'></div>
         <div className='line'></div>
