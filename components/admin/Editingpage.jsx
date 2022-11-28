@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {GrClose} from 'react-icons/gr'
+import {IoIosArrowDown} from 'react-icons/io'
 import { updateNavbarData } from '../../fetchData/fetchingData'
 import NavbarForm from './NavbarForm'
 
@@ -39,35 +40,23 @@ const Editingpage = ({
     const [contactBoxes, setContactBoxes] = useState(updatedContactData.formData)
 
 
+    const [navbarShow, setNavbarShow ] = useState(false)
+
+
 
    //helpers
     const addInputField = (el, elSetter,  updatedArr, updatedArrSetter) => {
         if(updatedArr?.list) {
-            const arr =[...el, '']
+            const arr =[...el, ""]
             elSetter(arr)
-            console.log(arr)
-        
-            updatedArrSetter(prev => ({...prev, list:arr}))
-            console.log(updatdetNavData)
             return
-
         }
-        const list =  [...el, {}]
-        elSetter(list)
-        updatedArrSetter(prev => ({...prev,  boxes:list}))
-   }
-
-   const addListInput = (el, elSetter,  updatedArr, updatedArrSetter) => {
-  //  list, setList, updatdetNavData, setUpdatedNavData)
-  const arr =[...el, '']
-  elSetter(arr)
-  console.log(list)
-  updatedArrSetter(prev => ({...prev, list:arr}))
-  console.log(updatedArr)
-
-   }
- //index, featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData
-    const removeInput = (index, el, elSetter, updatedArr, updatedArrSetter) => {
+        const arr =  [...el, {}]
+        elSetter(arr)
+        updatedArrSetter(prev => ({...prev,  boxes:arr}))
+    }
+    
+   const removeInput = (index, el, elSetter, updatedArr, updatedArrSetter) => {
         if(updatedArr?.list) {
            const arr = [...el]
            arr.splice(index, 1)
@@ -82,10 +71,6 @@ const Editingpage = ({
         elSetter(list)
         updatedArrSetter(prev => ({...prev,  boxes:list}))
         console.log( featuresBoxes ,updatedArr)
-
-
-
-   
     }
 
     const handleArrayData = (e, index, el, elSetter) => {
@@ -109,20 +94,17 @@ const Editingpage = ({
         elSetter(list)
     }
 
-    const handleArrayText =(e, index, el ,elSetter) => {
+    const handleArrayText =(e, index, el ,elSetter, updatedArr, setUpdatedArr) => {
         const {name, value} = e.target
         const list = [...el]
         if(!name ) {
             list[index] = value
             elSetter(list)
+            setUpdatedArr(prev => ({...prev, list}))
+            console.log(updatedArr)
             console.log(list)
             return
         }
-      
-        
-        console.log(index,name, value)
-        
-     
         list[index][name] = value
         console.log(list)
         elSetter(list)
@@ -133,88 +115,81 @@ const Editingpage = ({
 
 
     //mutating sections
-    const saveNavbar =  e => {
-        e.preventDefault()
-        setUpdatedNavData({...updatdetNavData ,list})
-        updateNavbar(updatdetNavData)
-    }
-   
- 
-
     const mutateData = (e, mutateFunc, updatedData) => {
         e.preventDefault()
         console.log(updatedData)
         mutateFunc(updatedData)
-}
-
-  
-
-  
-
-  
-    
-
+    }
 
   return (
       <section className='editingPage'>
             <nav className='click' onClick={() => setEditiongPage(false)}><GrClose /></nav>
             <main className='edditing-data'>
-                {/* <NavbarForm
-                saveNavbar={saveNavbar} 
-                handleNavbarInput={handleNavbarInput} 
-                updatdetNavData={updateNavbarData}
-                setUpdatedNavData={setUpdatedNavData}
-                setList={setList}
-                list={list}
-              
-                 /> */}
-
-                 {/* //NAVBAR */}
-                <form className='edit-navbar' onSubmit={e => mutateData(e, updateNavbar, updatdetNavData)}>
-                    <h1>navbar</h1>
+               {/* //NAVBAR */}
+                <form className='edit-navbar edit-section' onSubmit={e => mutateData(e, updateNavbar, updatdetNavData)}>
+                     <div className='form-header'>
+                        <h1>navbar</h1>
+                        <IoIosArrowDown style={navbarShow ? {transform:'rotate(180deg)'} : {transform:'rotate(0deg)'}} onClick={() => setNavbarShow(prev => !prev)} size={20} />
+                     </div>
+                     {navbarShow &&
+                     <>
+                     <label className='label-div'><p>Logo:</p>
                     <input
+                    className='input-styles'
                     name='logo'
                     type='text'
                     value={updatdetNavData.logo}
                     onChange={(e) => handleArrayData(e, null, updatdetNavData, setUpdatedNavData)}
                      />
-                     <input
+                    </label>
+                    <label className='label-div'><p>Button Text:</p>
+                    <input
+                    className='input-styles'
                     name='btnText'
                     type='text'
                     value={updatdetNavData.btnText}
                     onChange={(e) => handleArrayData(e, null, updatdetNavData, setUpdatedNavData)}
                      />
-                       <button
+                    </label>
+                    <button className='form-btns'
                         onClick={() => addInputField(list, setList, updatdetNavData, setUpdatedNavData)}>add</button>
                      {list?.map((item, index) => {
                          return (
-                            <div key={index}>
-                            <input
-                             value={item}
-                             type="text"
-                             onChange={e => handleArrayText(e, index,list, setList )}
-
-                             />
-                       
-                             <button onClick={() => removeInput(index ,list, setList, updatdetNavData, setUpdatedNavData)}>delete</button>
-                            
-                             </div>
+                            <div className='boxes-styles' key={index}>
+                                <label className='label-div'><p>List Item:</p>
+                                <input
+                                className='input-styles'
+                                value={item}
+                                type="text"
+                                onChange={e => handleArrayText(e, index,list, setList, updatdetNavData, setUpdatedNavData )}
+                            />
+                                </label>
+                           
+                        <button className='form-btns' onClick={() => removeInput(index ,list, setList, updatdetNavData, setUpdatedNavData)}>delete</button>
+                        </div>
                         )
                      })}
-                     <button type="submit">save navbar</button>
-
+                     <button className='form-btns' type="submit">save navbar</button>
+                     </>
+                     }
+                    
                 </form>
 
                 {/* BUNNER */}
-                <form className='edit-banner' onClick={e => mutateData(e, updateBanner, updatedBannerData)}>
+                <form className=' edit-section' onClick={e => mutateData(e, updateBanner, updatedBannerData)}>
                     <h1>banner</h1>
+                    <label ><p>Bunner First Text:</p>
                     <textarea
+                    className='input-styles'
                     name='firstText'
                     type='text'
                     onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
                     value={updatedBannerData.firstText}
                     />
+                    </label>
+                   
                     <textarea
+                    className='input-styles'
                     name='secondText'
                     type='text'
                     onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
@@ -222,17 +197,18 @@ const Editingpage = ({
 
                      />
                      <input
+                     className='input-styles'
                     name='btnText'
                     type='text'
                     onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
                     value={updatedBannerData.btnText}
 
                      />
-                     <button type='submit'>Save </button>
+                     <button className='form-btns' type='submit'>Save </button>
                 </form>
 
                 {/* WORKFLOW */}
-                <form className='edit-workflow' onClick={(e) =>mutateData(e, updateWorkflow, updatedWorkflowData)}>
+                <form className='edit-workflow edit-section' onClick={(e) =>mutateData(e, updateWorkflow, updatedWorkflowData)}>
                     <h1>workflow</h1>
                     <input 
                     name='headerText'
@@ -262,7 +238,7 @@ const Editingpage = ({
 
 
                 {/* FEATURES */}
-                <form className='edit-features' onClick={e => mutateData(e, updateFeatures, updatedFeaturesData)}>
+                <form className='edit-features edit-section' onClick={e => mutateData(e, updateFeatures, updatedFeaturesData)}>
                     <h1>Features Field</h1>
                     <input 
                     name='headerText'
@@ -303,7 +279,7 @@ const Editingpage = ({
                 </form>
 
                 {/* PRICING */}
-                <form className='edit-pricing' onSubmit={(e) => mutateData(e, updatePricing, updatedPricingData)}>
+                <form className='edit-pricing edit-section' onSubmit={(e) => mutateData(e, updatePricing, updatedPricingData)}>
                     <h1>Pricing Field</h1>
                     <input
                     name='headerText'
@@ -352,6 +328,76 @@ const Editingpage = ({
                      ))}
 
                     <button type='submit'>Submit Pricign Data</button>
+
+                </form>
+
+                {/* CONTACT */}
+                <form  className='edit-contact edit-section' onSubmit={(e) => mutateData(e, updateContact, updatedContactData)}>
+                    <h1>Contact Field</h1>
+                    <label> Header:
+                    <input 
+                    name='headerText'
+                    type='text'
+                    value={updatedContactData.headerText}
+                    onChange={e => handleArrayData(e, null, updatedContactData, setUpdatedContactData)} 
+
+                     />
+                    </label>
+                    {contactBoxes.map((box, index) => (
+                        <div key={index} className="form-input-boxes">
+                            <label> FirstInput:
+                            <input
+                            name='firstInput'
+                            type='text'
+                            value={box.firstInput}
+                            onChange={(e) => handleArrayText(e, index ,contactBoxes, setContactBoxes )}
+
+                             />
+                        </label>
+                        <label> SecondInput:
+                            <input
+                            name='secondInput'
+                            type='text'
+                            value={box.secondInput}
+                            onChange={(e) => handleArrayText(e, index ,contactBoxes, setContactBoxes )}
+
+                             />
+                        </label>
+                        <label> thirdInput:
+                            <input
+                            name='thirdInput'
+                            type='text'
+                            value={box.thirdInput}
+                            onChange={(e) => handleArrayText(e, index ,contactBoxes, setContactBoxes )}
+
+                             />
+                        </label>
+                        <label> credentialsInput:
+                            <input
+                            name='credentialsInput'
+                            type='text'
+                            value={box.credentialsInput}
+                            onChange={(e) => handleArrayText(e, index ,contactBoxes, setContactBoxes )}
+
+                             />
+                        </label>
+                        <label> btnTextInput:
+                            <input
+                            name='btnText'
+                            type='text'
+                            value={box.btnText}
+                            onChange={(e) => handleArrayText(e, index ,contactBoxes, setContactBoxes )}
+
+                             />
+                        </label>
+                        </div>
+                        
+                        
+                        
+                    ))}
+
+                    <button  type='submit'>Save Contact</button>
+                    
 
                 </form>
             </main>
