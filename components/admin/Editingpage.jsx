@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {GrClose} from 'react-icons/gr'
-import {IoIosArrowDown} from 'react-icons/io'
 import { updateNavbarData } from '../../fetchData/fetchingData'
+import FormHeader from './FormHeader'
 import NavbarForm from './NavbarForm'
 
 
@@ -41,6 +41,9 @@ const Editingpage = ({
 
 
     const [navbarShow, setNavbarShow ] = useState(false)
+    const [bannerShow, setBannerShow ] = useState(false)
+    const [workflowShow, setWorkflowShow ] = useState(false)
+
 
 
 
@@ -127,10 +130,7 @@ const Editingpage = ({
             <main className='edditing-data'>
                {/* //NAVBAR */}
                 <form className='edit-navbar edit-section' onSubmit={e => mutateData(e, updateNavbar, updatdetNavData)}>
-                     <div className='form-header'>
-                        <h1>navbar</h1>
-                        <IoIosArrowDown style={navbarShow ? {transform:'rotate(180deg)'} : {transform:'rotate(0deg)'}} onClick={() => setNavbarShow(prev => !prev)} size={20} />
-                     </div>
+                     <FormHeader text="navb" show={navbarShow} setShow={setNavbarShow} />
                      {navbarShow &&
                      <>
                      <label className='label-div'><p>Logo:</p>
@@ -177,7 +177,10 @@ const Editingpage = ({
 
                 {/* BUNNER */}
                 <form className=' edit-section' onClick={e => mutateData(e, updateBanner, updatedBannerData)}>
-                    <h1>banner</h1>
+                    <FormHeader text="banner s" show={bannerShow} setShow={setBannerShow} />
+
+                    {bannerShow && 
+                    <>
                     <label ><p>Bunner First Text:</p>
                     <textarea
                     className='input-styles'
@@ -187,15 +190,12 @@ const Editingpage = ({
                     value={updatedBannerData.firstText}
                     />
                     </label>
-                   
                     <textarea
                     className='input-styles'
                     name='secondText'
                     type='text'
                     onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
-                    value={updatedBannerData.secondText}
-
-                     />
+                    value={updatedBannerData.secondText}/>
                      <input
                      className='input-styles'
                     name='btnText'
@@ -205,35 +205,49 @@ const Editingpage = ({
 
                      />
                      <button className='form-btns' type='submit'>Save </button>
+                    </>
+                    }
                 </form>
 
                 {/* WORKFLOW */}
                 <form className='edit-workflow edit-section' onClick={(e) =>mutateData(e, updateWorkflow, updatedWorkflowData)}>
-                    <h1>workflow</h1>
-                    <input 
+                <FormHeader text="workflow" show={workflowShow} setShow={setWorkflowShow} />
+                  {workflowShow && 
+                  <>
+                   <label><p> header Text:</p>
+                   <input 
+                    className='input-styles'
                     name='headerText'
                     type='text'
                     value={updatedWorkflowData.headerText}
                     onChange={(e) => handleArrayData(e, null, updatedWorkflowData, setUpdateWorkflowData)}
                     />
+                   </label>
+                   
 
-                    <button onClick={() => addInputField(workflowBoxes, setWorkflowBoxes,updatedWorkflowData, setUpdateWorkflowData)}>Add Box Data</button>
+                    <button className='form-btns' onClick={() => addInputField(workflowBoxes, setWorkflowBoxes,updatedWorkflowData, setUpdateWorkflowData)}>Add Box Data</button>
                     {workflowBoxes?.map((box, index) => {
                  
                         return (
                             <div key={index}>
+                                <label><p>Text:</p>
                                 <textarea 
+                                className='input-styles'
                                 name='text'
                                 type="text"
                                 value={box.text}
                                 onChange={e => handleArrayText(e, index,workflowBoxes, setWorkflowBoxes )}
                                 />
-                                <button onClick={() => removeInput(index, workflowBoxes, setWorkflowBoxes, updatedWorkflowData, setUpdateWorkflowData)}
+                                </label>
+                                
+                                <button className='form-btns' onClick={() => removeInput(index, workflowBoxes, setWorkflowBoxes, updatedWorkflowData, setUpdateWorkflowData)}
                                 >delete</button>
                         </div>
                         )
                     })}
-                    <button type='submit'>Save Workflow</button>
+                    <button className='form-btns' type='submit'>Save Workflow</button>
+                  </>
+                  }
                 </form>
 
 
