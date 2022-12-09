@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {useRouter } from 'next/router'
 import { 
@@ -22,39 +22,41 @@ import Editingpage from '../../components/admin/Editingpage'
 import { useMutation } from '@tanstack/react-query'
 import Application from '../../components/admin/Application'
 
-// export async  function getServerSideProps() {
-//   // const bannerData = await getBannerData()
-//   const navbarData = await getNavbarData()
-//   const workflowData = await getWorkflowData()
-//   const featuresData = await getFeaturesData()
-//   const userFormData = await getUserFormData()
- 
-//   return {
-//     props: {  navbarData, workflowData, featuresData, userFormData}
-//   }
-// }
-
-const  index = async (props) => {
-  const router = useRouter()
+export async  function getStaticProps() {
   const bannerData = await getBannerData()
   const navbarData = await getNavbarData()
   const workflowData = await getWorkflowData()
   const featuresData = await getFeaturesData()
-  const userFData = await getUserFormData()
+  const userFormData = await getUserFormData()
+  return {
+    props: { bannerData, navbarData, workflowData, featuresData, userFormData}
+  }
+}
 
-
+const index = (props) => {
+  const router = useRouter()
+  const [bannerData, setBannerData] = useState()
   const [editingPage, setEditiongPage] = useState(false)
   const [applicationPage, setApplicationPage] = useState(false)
   const queryClient = new QueryClient()
   const [current, setCurrentPage] = useState('')
 
- 
+  useEffect(() => {
+    async function getD () {
+      const bannerData = await getBannerData()
+    setBannerData(bannerData)
+
+    }
+    getD()
+
+
+  }, [])
 
 
   const {data:NavbarData} = useQuery({
     queryKey:['navbar'],
     queryFn: getNavbarData,
-    initialData:navbarData
+    initialData:props.navbarData
 
   })
 
@@ -63,40 +65,40 @@ const  index = async (props) => {
   const {data:BannerData} = useQuery({
     queryKey:['banner'],
     queryFn: getBannerData,
-    initialData: bannerData
+    initialData:bannerData
 
   })
   const {data: WorkflowData} = useQuery({
     queryKey:['worflow'],
     queryFn: getWorkflowData,
-    initialData:workflowData
+    initialData:props.workflowData
 
   })
 
   const {data: FeaturesData} = useQuery({
     queryKey:['features'],
     queryFn: getFeaturesData,
-    initialData:featuresData
+    initialData:props.featuresData
 
   })
   const {data: PricingData} = useQuery({
     queryKey:['pricing'],
     queryFn: getPricingData,
-    initialData:pricingData
+    initialData:props.pricingData
 
   })
 
   const {data: ContactData} = useQuery({
     queryKey:['contact'],
     queryFn: getContactData,
-    initialData:ContactData
+    initialData:props.ContactData
 
   })
 
   const {data:userFormData} = useQuery({
     queryKey:['userFormData'],
     queryFn: getUserFormData,
-    initialData:userFData
+    initialData:props.userFormData
 
   })
 
