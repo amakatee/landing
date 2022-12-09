@@ -22,21 +22,27 @@ import Editingpage from '../../components/admin/Editingpage'
 import { useMutation } from '@tanstack/react-query'
 import Application from '../../components/admin/Application'
 
-export async  function getServerSideProps() {
-  // const bannerData = await getBannerData()
-  const navbarData = await getNavbarData()
-  const workflowData = await getWorkflowData()
-  const featuresData = await getFeaturesData()
-  const userFormData = await getUserFormData()
+// export async  function getServerSideProps() {
+//   // const bannerData = await getBannerData()
+//   const navbarData = await getNavbarData()
+//   const workflowData = await getWorkflowData()
+//   const featuresData = await getFeaturesData()
+//   const userFormData = await getUserFormData()
  
-  return {
-    props: {  navbarData, workflowData, featuresData, userFormData}
-  }
-}
+//   return {
+//     props: {  navbarData, workflowData, featuresData, userFormData}
+//   }
+// }
 
 const  index = async (props) => {
   const router = useRouter()
   const bannerData = await getBannerData()
+  const navbarData = await getNavbarData()
+  const workflowData = await getWorkflowData()
+  const featuresData = await getFeaturesData()
+  const userFData = await getUserFormData()
+
+
   const [editingPage, setEditiongPage] = useState(false)
   const [applicationPage, setApplicationPage] = useState(false)
   const queryClient = new QueryClient()
@@ -48,7 +54,7 @@ const  index = async (props) => {
   const {data:NavbarData} = useQuery({
     queryKey:['navbar'],
     queryFn: getNavbarData,
-    initialData:props.navbarData
+    initialData:navbarData
 
   })
 
@@ -63,34 +69,34 @@ const  index = async (props) => {
   const {data: WorkflowData} = useQuery({
     queryKey:['worflow'],
     queryFn: getWorkflowData,
-    initialData:props.workflowData
+    initialData:workflowData
 
   })
 
   const {data: FeaturesData} = useQuery({
     queryKey:['features'],
     queryFn: getFeaturesData,
-    initialData:props.featuresData
+    initialData:featuresData
 
   })
   const {data: PricingData} = useQuery({
     queryKey:['pricing'],
     queryFn: getPricingData,
-    initialData:props.pricingData
+    initialData:pricingData
 
   })
 
   const {data: ContactData} = useQuery({
     queryKey:['contact'],
     queryFn: getContactData,
-    initialData:props.ContactData
+    initialData:ContactData
 
   })
 
   const {data:userFormData} = useQuery({
     queryKey:['userFormData'],
     queryFn: getUserFormData,
-    initialData:props.userFormData
+    initialData:userFData
 
   })
 
