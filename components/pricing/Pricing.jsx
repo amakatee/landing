@@ -43,9 +43,9 @@ const Pricing = ({boxes, headerText}) => {
           <div>
            
             <div>
-            {boxes?.map(box => (
+            {boxes?.map((box, i) => (
               
-               <SwiperSlide>
+               <SwiperSlide key={i} >
                <div className='pricing-swiper-box'>
                  <div className='pricing-card'>
                  <div className='pricing-image'>

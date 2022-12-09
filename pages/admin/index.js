@@ -14,7 +14,6 @@ import {
    updatedPricingData,
    getContactData,
    updatedContactData,
-   postUserFormData,
    getUserFormData
 } from '../../fetchData/fetchingData'
 import { QueryClient } from '@tanstack/react-query'
@@ -23,7 +22,7 @@ import Editingpage from '../../components/admin/Editingpage'
 import { useMutation } from '@tanstack/react-query'
 import Application from '../../components/admin/Application'
 
-export async  function getStaticProps() {
+export async  function getServerSideProps() {
   const bannerData = await getBannerData()
   const navbarData = await getNavbarData()
   const workflowData = await getWorkflowData()
@@ -41,9 +40,6 @@ const index = (props) => {
   const queryClient = new QueryClient()
   const [current, setCurrentPage] = useState('')
 
-  if (router.isFallback) {
-    return <div>Loading...</div>
-  }
 
   const {data:NavbarData} = useQuery({
     queryKey:['navbar'],
@@ -51,6 +47,8 @@ const index = (props) => {
     initialData:props.navbarData
 
   })
+
+  
 
   const {data:BannerData} = useQuery({
     queryKey:['banner'],
