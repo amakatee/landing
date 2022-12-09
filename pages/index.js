@@ -33,7 +33,7 @@ import Navbar from '../components/navbar/Navbar'
 //   return res.data[0]
 
 // }
-export async  function getStaticProps() {
+export async  function getServerSideProps() {
   const queryClient = new QueryClient()
   const navbarData = await getNavbarData()
   const bannerData = await getBannerData()
