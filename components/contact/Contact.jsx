@@ -28,7 +28,10 @@ const Contact = ({headerText, formData, userFormData, updateForm, updateUserData
   return (
     <main id='contact' className='contact-section'>
         <SectionHeader headerText={headerText} />
-        <Form formData={formData} submitForm={submitForm} err={err} />
+        {formData &&  
+                <Form formData={formData} submitForm={submitForm} err={err} />
+
+        }
        
     </main>
   )

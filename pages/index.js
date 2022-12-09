@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
+
 import Banner from '../components/banner/Banner'
 import KeyFeature from '../components/keyfeature/KeyFeature'
 import { useMutation } from '@tanstack/react-query'
@@ -18,22 +17,13 @@ import {
   getUserFormData,
   postUserFormData,
   updatedUserData
-
-
-
 } from '../fetchData/fetchingData'
 import { QueryClient } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query';
 import Navbar from '../components/navbar/Navbar'
 
 
-// export const getBannerData = async () => {
-//   const res = await axios.get('http://localhost:3000/api/banner')
-//   console.log(res.data[0])
-//   return res.data[0]
-
-// }
-export async  function getServerSideProps() {
+export async  function getInitialProps() {
   const queryClient = new QueryClient()
   const navbarData = await getNavbarData()
   const bannerData = await getBannerData()
@@ -42,9 +32,7 @@ export async  function getServerSideProps() {
   const pricingData = await getPricingData()
   const contactData = await getContactData()
   const userFormData = await getUserFormData()
-//  const updateUserFormData = await postUserFormData()
-  //const updateFormArray = await updatedUserData()
- 
+
   return {
     props: { 
       bannerData, 
@@ -54,11 +42,7 @@ export async  function getServerSideProps() {
       pricingData,
       contactData,
       userFormData,
-      // updateUserFormData,
-     // updateFormArray 
       
-      // postUser,
-      // userData
     }
   }
 }
@@ -67,32 +51,9 @@ export async  function getServerSideProps() {
 
 
 
-const pricingData = {
-  headerText: 'pricing',
-  box: [
-    {
-      firstText: "hello", 
-  secondText:'Доставка грузов из Китая',
-  thirdText: 'Доставка грузов из Китая   ',
-  fourthText: 'Автогрузоперевозки'
-    },
-    {
-      firstText: "hello", 
-  secondText:'Доставка грузов из Китая',
-  thirdText: 'Доставка грузов из Китая   ',
-  fourthText: 'Автогрузоперевозки'
-    }]
-}
 
-const contactData = {
-  headerText: "form",
-  formData: {
-    firstInput: 'name',
-    secondInput: 'email/phone',
-    thirdInput: 'message',
-    btnText: 'message'
-  }
-}
+
+
 
 export default function Home(props) {
 
@@ -145,12 +106,7 @@ export default function Home(props) {
 
    
   const queryClient = new QueryClient()
-  // const {mutate:postFormData} = useMutation(postUserFormData, {
-  //   onSuccess: (data) => {
-  //     console.log("sucss")
-  //     queryClient.setQueriesData(['userFormData', userFormData.id], data)
-  //   }
-  // })
+ 
 
   const {mutate:updateForm} = useMutation(updatedUserData, {
     onSuccess: (data) => {
@@ -177,7 +133,7 @@ export default function Home(props) {
       <WorkFlow headerText={WorkFlowData?.headerText} boxes={WorkFlowData?.boxes}/>
       {/* <KeyFeature headerText={FeaturesData?.headerText}  boxes={FeaturesData?.boxes}/> */}
       <Pricing boxes={pricingData?.boxes} headerText={pricingData?.headerText}/>
-      <Contact headerText={contactData?.headerText} formData={contactData?.formData}  userFormData={userFormData} updateForm={updateForm} updateUserData={updateUserData} />
+      <Contact headerText={contactData?.headerText} formData={contactData?.formData}  userFormData={userFormData ? userFormData : null} updateForm={updateForm ? updateForm :null} updateUserData={updateUserData ? updateUserData : null} />
     </Layout>
   )
 }

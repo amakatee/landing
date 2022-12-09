@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../Button'
+ 
 const Navbar = ({logo, btnText, list}) => {
   console.log(logo)
   return (
