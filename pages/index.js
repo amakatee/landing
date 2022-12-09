@@ -18,13 +18,13 @@ import {
   postUserFormData,
   updatedUserData
 } from '../fetchData/fetchingData'
-import { QueryClient } from '@tanstack/react-query'
+import { QueryClient , useQueryClient } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query';
 import Navbar from '../components/navbar/Navbar'
 
 
 export async  function getInitialProps() {
-  const queryClient = new QueryClient()
+
   const navbarData = await getNavbarData()
   const bannerData = await getBannerData()
   const workflowData = await getWorkflowData()
@@ -57,13 +57,13 @@ export async  function getInitialProps() {
 
 export default function Home(props) {
 
-  const {data:NavbarData} = useQuery({
-    queryKey:['navbar'],
-    queryFn: getNavbarData,
-    initialData:props.navbarData
+  // const {data:NavbarData} = useQuery({
+  //   queryKey:['navbar'],
+  //   queryFn: getNavbarData,
+  //   initialData:props.navbarData
 
-  })
- 
+  // })
+  const queryClient = new QueryClient();
   const {data:BannerData} = useQuery({
     queryKey:['banner'],
     queryFn: getBannerData,
@@ -105,7 +105,6 @@ export default function Home(props) {
    console.log(userFormData)
 
    
-  const queryClient = new QueryClient()
  
 
   const {mutate:updateForm} = useMutation(updatedUserData, {
