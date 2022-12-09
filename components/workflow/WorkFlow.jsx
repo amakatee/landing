@@ -20,6 +20,7 @@ const WorkFlow = ({headerText, boxes}) => {
              </div>
             ))}
         </div>
+        <div className='palette'>hello</div>
     </main>
   )
 }

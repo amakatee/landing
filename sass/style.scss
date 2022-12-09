@@ -33,6 +33,8 @@ $maincolor:#7a9584;
 
 html,
 body {
+    
+    text-rendering: optimizeLegibility;
     // font-family: Helvetica Neue;
     font-family: "Noto Sans Display","Noto Serif SC","Noto Serif TC",sans-serif;
     font-weight: 300;
