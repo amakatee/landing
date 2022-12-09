@@ -6,7 +6,7 @@ import NavbarForm from './NavbarForm'
 
 
 const Editingpage = ({
-    setEditiongPage,
+    setShow,
     navbarData,
     updateNavbar, 
     bannerData,
@@ -43,9 +43,9 @@ const Editingpage = ({
     const [navbarShow, setNavbarShow ] = useState(false)
     const [bannerShow, setBannerShow ] = useState(false)
     const [workflowShow, setWorkflowShow ] = useState(false)
-
-
-
+    const [featuresShow, setFeaturesShow] = useState(false)
+    const [pricingShow, setPricingShow] = useState(false)
+    const [contactShow, setContactShow] = useState(false)
 
    //helpers
     const addInputField = (el, elSetter,  updatedArr, updatedArrSetter) => {
@@ -122,12 +122,16 @@ const Editingpage = ({
         e.preventDefault()
         console.log(updatedData)
         mutateFunc(updatedData)
-    }
+   }
+
+    
 
   return (
       <section className='editingPage'>
-            <nav className='click' onClick={() => setEditiongPage(false)}><GrClose /></nav>
+         
+            <nav className='click' onClick={() => setShow(false)}><GrClose /></nav>
             <main className='edditing-data'>
+          
                {/* //NAVBAR */}
                 <form className='edit-navbar edit-section' onSubmit={e => mutateData(e, updateNavbar, updatdetNavData)}>
                      <FormHeader text="navb" show={navbarShow} setShow={setNavbarShow} />
@@ -230,6 +234,16 @@ const Editingpage = ({
                  
                         return (
                             <div key={index}>
+                                <label> headerBoxText:
+                                    <input 
+                                    className='input-styles'
+                                    name='headerText'
+                                    type='text'
+                                    value={box.headerText}
+                                    onChange={e => handleArrayText(e, index, workflowBoxes, setWorkflowBoxes)}
+                                    />
+
+                                </label>
                                 <label><p>Text:</p>
                                 <textarea 
                                 className='input-styles'
@@ -253,60 +267,77 @@ const Editingpage = ({
 
                 {/* FEATURES */}
                 <form className='edit-features edit-section' onClick={e => mutateData(e, updateFeatures, updatedFeaturesData)}>
-                    <h1>Features Field</h1>
+                   <FormHeader text="features" show={featuresShow} setShow={setFeaturesShow} />
+
+                    {featuresShow && 
+                    <>
+                    <label><p>header Text :</p>
                     <input 
+                    className='input-styles'
                     name='headerText'
                     type='text'
                     value={updatedFeaturesData.headerText}
                     onChange={e => handleArrayData(e, null, updatedFeaturesData, setUpdatedFeaturesData)}                    
                     />
-
-                    <button onClick={() => addInputField(featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData)}>Add new Feature</button>
+                    </label>
+                    <button className='form-btns' onClick={() => addInputField(featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData)}>Add new Feature</button>
                     {featuresBoxes.map((box, index) => {
                         return (
                             <div  key={index} className='boxes-cont'>
-                                 <div>
-                                <input
+                      
+                               <label><p>header Text</p>
+                               <input
+                                className='input-styles'
                                 name='headerText'
                                 type='text'
                                 value={box.headerText}
                                 onChange={e => handleArrayText(e, index, featuresBoxes, setFeaturesBoxes)}
 
                                  />
+
+                               </label>
+                                
+                                 <label><p>text:</p>
                                  <textarea
+                                 className='input-styles'
                                  name='text'
                                  type='text'
                                  value={box.text}
                                  onChange={(e) => handleArrayText(e, index, featuresBoxes, setFeaturesBoxes)}
                                   />
-                                   <button onClick={() => removeInput(index, featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData)}
+
+                                 </label>
+                                   <button className='form-btns' onClick={() => removeInput(index, featuresBoxes, setFeaturesBoxes, updatedFeaturesData, setUpdatedFeaturesData)}
                                 >delete</button>
-                                
-                            </div>
                             </div>
                            
                         )
                     })}
-                    
-                    <button type="submit">Save Features</button>
-
+                    <button className='form-btns' type="submit">Save Features</button>
+                    </>
+                    }
                 </form>
 
                 {/* PRICING */}
                 <form className='edit-pricing edit-section' onSubmit={(e) => mutateData(e, updatePricing, updatedPricingData)}>
-                    <h1>Pricing Field</h1>
+                   <FormHeader text="pricing" show={pricingShow} setShow={setPricingShow} />
+                   {pricingShow && 
+                   <>
+                    <label><p>Header:</p>
                     <input
+                    className='input-styles'
                     name='headerText'
                     type='text'
                     value={updatedPricingData.headerText}
-                    
                     onChange={e => handleArrayData(e, null, updatedPricingData, setUpdatedPricingData)} 
                      />
-                     <button onClick={() => addInputField(pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Add new Pricing</button>
+                    </label>
+                     <button className='form-btns' onClick={() => addInputField(pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Add new Pricing</button>
                      {pricingBoxes.map((box, index) => (
-                         <div>
+                         <div className='boxes-cont'>
                              <label> first Text
                              <textarea
+                             className='input-styles'
                              name='firstText'
                              type='text'
                              value={box.firstText}
@@ -315,6 +346,7 @@ const Editingpage = ({
                               </label>
                               <label> second Text
                              <textarea
+                             className='input-styles'
                              name='secondText'
                              type='text'
                              value={box.secondText}
@@ -323,6 +355,7 @@ const Editingpage = ({
                               </label>
                               <label> third Text
                              <textarea
+                             className='input-styles'
                              name='thirdText'
                              type='text'
                              value={box.thirdText}
@@ -331,26 +364,33 @@ const Editingpage = ({
                               </label>
                               <label> fourthText 
                              <textarea
+                             className='input-styles'
                              name='fourthText'
                              type='text'
                              value={box.fourthText}
                              onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
                               />
                               </label>
-                              <button onClick={() => removeInput(index,pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Delete</button>
+                              <button className='form-btns' onClick={() => removeInput(index,pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Delete</button>
                          </div>
                      ))}
 
-                    <button type='submit'>Submit Pricign Data</button>
+                    <button className='form-btns' type='submit'>Submit Pricign Data</button>
+                   </>
+                   }
 
                 </form>
 
                 {/* CONTACT */}
                 <form  className='edit-contact edit-section' onSubmit={(e) => mutateData(e, updateContact, updatedContactData)}>
-                    <h1>Contact Field</h1>
-                    <label> Header:
+                <FormHeader text="contact" show={contactShow} setShow={setContactShow} />
+                {contactShow && 
+                <>
+
+                   <label> Header:
                     <input 
                     name='headerText'
+                    className='input-styles'
                     type='text'
                     value={updatedContactData.headerText}
                     onChange={e => handleArrayData(e, null, updatedContactData, setUpdatedContactData)} 
@@ -358,9 +398,10 @@ const Editingpage = ({
                      />
                     </label>
                     {contactBoxes.map((box, index) => (
-                        <div key={index} className="form-input-boxes">
+                        <div className='boxes-cont' key={index} >
                             <label> FirstInput:
                             <input
+                            className='input-styles'
                             name='firstInput'
                             type='text'
                             value={box.firstInput}
@@ -370,6 +411,7 @@ const Editingpage = ({
                         </label>
                         <label> SecondInput:
                             <input
+                            className='input-styles'
                             name='secondInput'
                             type='text'
                             value={box.secondInput}
@@ -380,6 +422,7 @@ const Editingpage = ({
                         <label> thirdInput:
                             <input
                             name='thirdInput'
+                            className='input-styles'
                             type='text'
                             value={box.thirdInput}
                             onChange={(e) => handleArrayText(e, index ,contactBoxes, setContactBoxes )}
@@ -389,6 +432,7 @@ const Editingpage = ({
                         <label> credentialsInput:
                             <input
                             name='credentialsInput'
+                            className='input-styles'
                             type='text'
                             value={box.credentialsInput}
                             onChange={(e) => handleArrayText(e, index ,contactBoxes, setContactBoxes )}
@@ -397,6 +441,7 @@ const Editingpage = ({
                         </label>
                         <label> btnTextInput:
                             <input
+                            className='input-styles'
                             name='btnText'
                             type='text'
                             value={box.btnText}
@@ -405,12 +450,11 @@ const Editingpage = ({
                              />
                         </label>
                         </div>
-                        
-                        
-                        
                     ))}
 
-                    <button  type='submit'>Save Contact</button>
+                    <button className='form-btns'  type='submit'>Save Contact</button>
+                </>
+                }
                     
 
                 </form>

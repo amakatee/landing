@@ -1,13 +1,28 @@
 $typografydark: #17263b;
-$babyblue: #63A4FF;
-
-.edditing-data{
+$babyblue: #77d2d2;
+$lightblue: #77d2d2;
+.admin-window {
     background-color:  $typografydark;
     width: 100%;
+    min-height: 100vh;
+
+}
+.edditing-data{
+  
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 6rem;
+    padding-block: 6rem;
     gap: 1rem;
+
+    
+    .boxes-cont {
+        display: flex;
+        flex-direction: column;
+        
+        gap: 1rem;
+    }
  
 
     
@@ -92,6 +107,32 @@ $babyblue: #63A4FF;
         .form-input-boxes {
             display: flex;
             flex-direction: column;
+        }
+    }
+}
+
+
+.application-page {
+    background-color: #17263b;
+     
+
+    .application-data {
+        width: 90%;
+        margin: auto;
+
+        .application-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .user-data-box {
+                border: 1px solid white;
+                padding: 1em;
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                border-radius: 10px;
+            }
         }
     }
 }

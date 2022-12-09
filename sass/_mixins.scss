@@ -1,0 +1,21 @@
+@mixin small {
+    @media (max-width:  46.8em) {
+      @content;
+    }
+  }
+  
+  @mixin medium {
+      @media (min-width: 46.8em) and (max-width:  55em) {
+        @content;
+      }
+   }
+  
+  
+  @mixin large {
+      @media (min-width: 55em) {
+        @content;
+      }
+  }
+
+
+  

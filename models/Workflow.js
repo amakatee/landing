@@ -10,6 +10,7 @@ const workflowSchema = new mongoose.Schema({
     },
     boxes: [{
         img: String,
+        headerText: String,
         text: String
     }],
    

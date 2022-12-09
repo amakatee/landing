@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Banner from '../components/banner/Banner'
 import KeyFeature from '../components/keyfeature/KeyFeature'
+import { useMutation } from '@tanstack/react-query'
 
 import Layout from '../components/Layout'
 import WorkFlow from '../components/workflow/WorkFlow'
@@ -13,11 +14,16 @@ import {
   getWorkflowData,
   getFeaturesData,
   getPricingData,
-  getContactData
+  getContactData,
+  getUserFormData,
+  postUserFormData,
+  updatedUserData
+
+
 
 } from '../fetchData/fetchingData'
-
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
 import Navbar from '../components/navbar/Navbar'
 
 
@@ -35,8 +41,10 @@ export async  function getStaticProps() {
   const featuresData = await getFeaturesData()
   const pricingData = await getPricingData()
   const contactData = await getContactData()
-
-// await queryClient.prefetchQuery(['banner'], getBannerData)
+  const userFormData = await getUserFormData()
+//  const updateUserFormData = await postUserFormData()
+  //const updateFormArray = await updatedUserData()
+ 
   return {
     props: { 
       bannerData, 
@@ -44,7 +52,13 @@ export async  function getStaticProps() {
       workflowData, 
       featuresData,
       pricingData,
-      contactData
+      contactData,
+      userFormData,
+      // updateUserFormData,
+     // updateFormArray 
+      
+      // postUser,
+      // userData
     }
   }
 }
@@ -120,7 +134,35 @@ export default function Home(props) {
     initialData:props.contactData
 
   })
-  console.log(contactData)
+
+  const {data:userFormData} = useQuery({
+    queryKey:['userFormData'],
+    queryFn: getUserFormData,
+    initialData:props.userFormData
+
+  })
+   console.log(userFormData)
+
+   
+  const queryClient = new QueryClient()
+  // const {mutate:postFormData} = useMutation(postUserFormData, {
+  //   onSuccess: (data) => {
+  //     console.log("sucss")
+  //     queryClient.setQueriesData(['userFormData', userFormData.id], data)
+  //   }
+  // })
+
+  const {mutate:updateForm} = useMutation(updatedUserData, {
+    onSuccess: (data) => {
+      queryClient.setQueriesData(['userFormData', userFormData.id], data)
+    }
+  })
+  
+  const {mutate: updateUserData} = useMutation(postUserFormData, {
+    onSuccess: (data) => {
+      console.log(data)
+    }
+  })
  
  
 
@@ -130,12 +172,12 @@ export default function Home(props) {
    
   return (
     <Layout  >
-      <Navbar logo={NavbarData?.logo} list={NavbarData?.list} btnText={NavbarData?.btnText}/>
-      <Banner img={BannerData?.img} firstText={BannerData?.firstText} formText={BannerData?.formText} btnText={BannerData?.btnText} />
+      {/* <Navbar logo={NavbarData?.logo} list={NavbarData?.list} btnText={NavbarData?.btnText}/> */}
+      <Banner img={BannerData?.img} firstText={BannerData?.firstText} secondText={BannerData?.secondText} formText={BannerData?.formText} btnText={BannerData?.btnText} />
       <WorkFlow headerText={WorkFlowData?.headerText} boxes={WorkFlowData?.boxes}/>
-      <KeyFeature headerText={FeaturesData?.headerText}  boxes={FeaturesData?.boxes}/>
+      {/* <KeyFeature headerText={FeaturesData?.headerText}  boxes={FeaturesData?.boxes}/> */}
       <Pricing boxes={pricingData?.boxes} headerText={pricingData?.headerText}/>
-      <Contact headerText={contactData?.headerText} formData={contactData?.formData} />
+      <Contact headerText={contactData?.headerText} formData={contactData?.formData}  userFormData={userFormData} updateForm={updateForm} updateUserData={updateUserData} />
     </Layout>
   )
 }

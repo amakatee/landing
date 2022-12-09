@@ -44,6 +44,7 @@ export default async  function handler(req, res) {
 
                         currentContactData.headerText = headerText
                         currentContactData.formData = formData
+              
 
                         const updatedContactData = await currentContactData.save()
                         return res.status(200).json({"mes": `${updatedContactData.headerText} updated`})

@@ -1,3 +1,5 @@
+
+@import 'mixins';
 @import "./layouts/first";
 @import "./layouts/banner";
 @import "./layouts/features";
@@ -17,8 +19,9 @@
 $mainblue: "#1b2845";
 $lightblue: #77d2d2;
 // $darkback:#0c171b; 
-$typografydark: #17263b;
+$typografydark: #1a1a1a;;
 $babyblue: #63A4FF;
+$maincolor:#7a9584;
 
 
 
@@ -30,7 +33,9 @@ $babyblue: #63A4FF;
 
 html,
 body {
-    font-family: Helvetica Neue;
+    // font-family: Helvetica Neue;
+    font-family: "Noto Sans Display","Noto Serif SC","Noto Serif TC",sans-serif;
+    font-weight: 300;
     background-color: white ;
     color: $typografydark;
 }
@@ -40,10 +45,16 @@ html {
   }
 
 
+
+  
   .layout {
     display: flex;
     gap: 5rem;
     flex-direction: column;
+    
+    @include large() {
+        gap:10rem;
+    }
     
 }
 

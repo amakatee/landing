@@ -1,4 +1,5 @@
 $babyblue: #63A4FF;
+$maincolor:#7a9584;
 
 .header-section {
     width: 100%;
@@ -6,7 +7,7 @@ $babyblue: #63A4FF;
         min-height: 20vh;
         display: grid;
         place-content: center;
-        color: $babyblue;
+        color: $maincolor;
 }
 
 

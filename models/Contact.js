@@ -14,7 +14,7 @@ import mongoose from 'mongoose';
           thirdInput: String,
           credentialsInput: String,
           btnText: String
-      }],
+      }]
      
   })
   

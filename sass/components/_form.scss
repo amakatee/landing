@@ -7,9 +7,13 @@
     justify-content: space-around;
     flex-direction: column;
     gap: 1.2rem;
-    box-shadow: 0 8px 24px hsl(210deg 8% 62% / 20%);
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 30%);
     padding-block: 2rem;
     border-radius: 20px;
+    @include large() {
+        max-width: 30rem;
+
+    }
 
     .contact-input {
         width: 17rem;
@@ -17,8 +21,9 @@
         border-radius: 10px;
         outline: none;
         border: none;
+        background-color: rgb(230, 230, 230);
 
-        border: 1px solid lightgrey;
+        // border: 1px solid lightgrey;
 
         font-size: 1rem;
       
@@ -60,4 +65,8 @@
         margin-bottom: .3px;
         
     }
+}
+
+label p{
+    margin-bottom: .5rem;
 }

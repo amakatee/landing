@@ -23,7 +23,6 @@ export default async  function handler(req, res) {
         case "POST": 
         try {
             const {headerText, boxes} = req.body
-
             result = await Features.create({headerText, boxes})
             if(result) {
                 return res.status(200).json({"mes": `feture created ${headerText}`})
@@ -45,10 +44,6 @@ export default async  function handler(req, res) {
 
             const updatedFeaturesData = currentFeaturesData.save()
             return res.status(200).json({"mes": `Features updated ${updatedFeaturesData.headerText}`})
-
-
-            
-
         }catch(err) {
             console.log(err)
         }

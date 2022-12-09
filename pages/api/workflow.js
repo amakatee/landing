@@ -44,8 +44,7 @@ export default async  function handler(req, res) {
                     if(!currentWorkflowrData) return res.status(400).json({"mes": "No data found"})
                     currentWorkflowrData.headerText = headerText
                     currentWorkflowrData.boxes = boxes
-                    
-
+                   
                     const updatedWorkflowData = currentWorkflowrData.save()
                     return res.json({"mes": `Workflow updated ${updatedWorkflowData.headerText}`})
  

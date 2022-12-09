@@ -12,25 +12,30 @@ import {
    getPricingData,
    updatedPricingData,
    getContactData,
-   updatedContactData
+   updatedContactData,
+   postUserFormData,
+   getUserFormData
 } from '../../fetchData/fetchingData'
 import { QueryClient } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
 import Editingpage from '../../components/admin/Editingpage'
 import { useMutation } from '@tanstack/react-query'
+import Application from '../../components/admin/Application'
 
 export async  function getStaticProps() {
   const bannerData = await getBannerData()
   const navbarData = await getNavbarData()
   const workflowData = await getWorkflowData()
   const featuresData = await getFeaturesData()
+  const userFormData = await getUserFormData()
   return {
-    props: { bannerData, navbarData, workflowData, featuresData}
+    props: { bannerData, navbarData, workflowData, featuresData, userFormData}
   }
 }
 
 const index = (props) => {
   const [editingPage, setEditiongPage] = useState(false)
+  const [applicationPage, setApplicationPage] = useState(false)
   const queryClient = new QueryClient()
   const [current, setCurrentPage] = useState('')
 
@@ -74,6 +79,15 @@ const index = (props) => {
 
   })
 
+  const {data:userFormData} = useQuery({
+    queryKey:['userFormData'],
+    queryFn: getUserFormData,
+    initialData:props.userFormData
+
+  })
+
+  console.log(userFormData)
+  
   
   const {mutate:updateBanner} = useMutation(updatetBannerData, {
     onSuccess: (data) => {
@@ -107,18 +121,22 @@ const index = (props) => {
     }
   })
 
+
+
+  console.log(editingPage)
+
   return (
     <main className='admin-page'>
         <button className='logout-btn'>log out</button>
         <br />
         <div className='admin-boxes'>
-          <Link href="/admin/applications">
-          <div className='admin-box'>
+     
+          <div className='admin-box' onClick={() => setApplicationPage(prev => !prev)}>
                 <h3>Application</h3>
                 <p>see new emails</p>
 
             </div>
-          </Link>
+    
             
             <div  className='admin-box'>
 
@@ -134,10 +152,10 @@ const index = (props) => {
             </div>
         </div>
       
-      {editingPage && 
+      {editingPage | applicationPage && 
         <section className='admin-window'>
           {editingPage && <Editingpage 
-            setEditiongPage={setEditiongPage}
+            setShow={setEditiongPage}
             navbarData={NavbarData}
             updateNavbar={updateNavbar}
             updateBanner={updateBanner}
@@ -154,6 +172,13 @@ const index = (props) => {
          
 
             />}
+
+            {applicationPage && <Application
+            setShow={setApplicationPage}
+            userFormData={userFormData}
+             />}
+           
+     
           
 
         </section>

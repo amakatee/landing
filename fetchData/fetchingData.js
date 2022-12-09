@@ -82,8 +82,29 @@ export const getContactData = async () => {
   return res.data[0]
 
 }
+
+
 export const updatedContactData = async (data) => {
   const res = await axiosBase.patch(`/contact`, data)
   return res.data[0]
+
+}
+export const getUserFormData = async () => {
+  const res = await axiosBase.get(`/userdata`)
+  return res.data
+
+}
+
+
+export const postUserFormData = async (data) => {
+   const res =   await axiosBase.post(`/userdata`, data)
+   return res.data
+ 
+
+}
+
+export const updatedUserData = async (data) => {
+  const res = await axiosBase.patch(`/userdata`, data)
+  return res.data
 
 }
