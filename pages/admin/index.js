@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import {useRouter } from 'next/router'
 import { 
    getBannerData,
    updatetBannerData ,
@@ -34,10 +35,15 @@ export async  function getStaticProps() {
 }
 
 const index = (props) => {
+  const router = useRouter()
   const [editingPage, setEditiongPage] = useState(false)
   const [applicationPage, setApplicationPage] = useState(false)
   const queryClient = new QueryClient()
   const [current, setCurrentPage] = useState('')
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
 
   const {data:NavbarData} = useQuery({
     queryKey:['navbar'],
