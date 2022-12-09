@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import {useRouter } from 'next/router'
 import { 
@@ -35,22 +35,10 @@ export async  function getStaticProps() {
 
 const index = (props) => {
   const router = useRouter()
-  const [bannerData, setBannerData] = useState()
   const [editingPage, setEditiongPage] = useState(false)
   const [applicationPage, setApplicationPage] = useState(false)
   const queryClient = new QueryClient()
   const [current, setCurrentPage] = useState('')
-
-  useEffect(() => {
-    async function getD () {
-      const bannerData = await getBannerData()
-    setBannerData(bannerData)
-
-    }
-    getD()
-
-
-  }, [])
 
 
   const {data:NavbarData} = useQuery({
@@ -60,12 +48,11 @@ const index = (props) => {
 
   })
 
-  
 
   const {data:BannerData} = useQuery({
     queryKey:['banner'],
     queryFn: getBannerData,
-    initialData:bannerData
+    initialData:props.bannerData
 
   })
   const {data: WorkflowData} = useQuery({
