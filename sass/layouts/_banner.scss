@@ -26,6 +26,8 @@ $maincolor:#7a9584;
         height: 100%;
          object-fit: cover;
          opacity: .9;
+         border-bottom-left-radius: 10%;
+         border-bottom-right-radius: 10%;
 
          @include large() {
             width:110%;

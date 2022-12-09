@@ -23,22 +23,26 @@ import { useMutation } from '@tanstack/react-query'
 import Application from '../../components/admin/Application'
 
 export async  function getServerSideProps() {
-  const bannerData = await getBannerData()
+  // const bannerData = await getBannerData()
   const navbarData = await getNavbarData()
   const workflowData = await getWorkflowData()
   const featuresData = await getFeaturesData()
   const userFormData = await getUserFormData()
+ 
   return {
-    props: { bannerData, navbarData, workflowData, featuresData, userFormData}
+    props: {  navbarData, workflowData, featuresData, userFormData}
   }
 }
 
-const index = (props) => {
+const  index = async (props) => {
   const router = useRouter()
+  const bannerData = await getBannerData()
   const [editingPage, setEditiongPage] = useState(false)
   const [applicationPage, setApplicationPage] = useState(false)
   const queryClient = new QueryClient()
   const [current, setCurrentPage] = useState('')
+
+ 
 
 
   const {data:NavbarData} = useQuery({
@@ -53,7 +57,7 @@ const index = (props) => {
   const {data:BannerData} = useQuery({
     queryKey:['banner'],
     queryFn: getBannerData,
-    initialData:props.bannerData
+    initialData: bannerData
 
   })
   const {data: WorkflowData} = useQuery({
