@@ -5,7 +5,8 @@ export default axios.create({
    
 })
 const axiosBase = axios.create({
-    baseURL:'http://localhost:3000/api'
+    baseURL:'http://localhost:3000/api',
+    credentials: "include"
   });
 //navbar
 export const getNavbarData = async () => {
