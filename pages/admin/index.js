@@ -28,8 +28,10 @@ export async  function getStaticProps() {
   const workflowData = await getWorkflowData()
   const featuresData = await getFeaturesData()
   const userFormData = await getUserFormData()
+  const pricingData = await getPricingData()
+  const contactData = await getContactData()
   return {
-    props: { bannerData, navbarData, workflowData, featuresData, userFormData}
+    props: { bannerData, navbarData, workflowData, featuresData, pricingData, userFormData, contactData}
   }
 }
 
@@ -78,7 +80,7 @@ const index = (props) => {
   const {data: ContactData} = useQuery({
     queryKey:['contact'],
     queryFn: getContactData,
-    initialData:props.ContactData
+    initialData:props.contactData
 
   })
 
@@ -130,8 +132,8 @@ const index = (props) => {
 
   return (
     <main className='admin-page'>
-      admin page
-        {/* <button className='logout-btn'>log out</button>
+  
+        <button className='logout-btn'>log out</button>
         <br />
         <div className='admin-boxes'>
      
@@ -160,17 +162,17 @@ const index = (props) => {
         <section className='admin-window'>
           {editingPage && <Editingpage 
             setShow={setEditiongPage}
-            navbarData={NavbarData}
+            // navbarData={NavbarData}
             updateNavbar={updateNavbar}
             updateBanner={updateBanner}
-            bannerData={BannerData}
-            workflowData={WorkflowData}
+            bannerData={props?.bannerData}
+            workflowData={props?.workflowData}
             updateWorkflow={updateWorkflow}
-            featuresData={FeaturesData}
+            featuresData={props?.featuresData}
             updateFeatures={updateFeatures}
-            pricingData={PricingData}
+            pricingData={props?.pricingData}
             updatePricing={updatePricing}
-            contactData={ContactData}
+            contactData={props?.contactData}
             updateContact={updateContact}
             
          
@@ -186,7 +188,7 @@ const index = (props) => {
           
 
         </section>
-     } */}
+     }
    
     </main>
   )

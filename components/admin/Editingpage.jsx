@@ -33,14 +33,14 @@ const Editingpage = ({
    
  
    
-    const [list, setList] = useState(updatdetNavData.list)
+    // const [list, setList] = useState(updatdetNavData.list)
     const [workflowBoxes, setWorkflowBoxes] = useState(updatedWorkflowData.boxes)
     const [featuresBoxes, setFeaturesBoxes] = useState(updatedFeaturesData.boxes)
     const [pricingBoxes, setPricingBoxes] = useState(updatedPricingData.boxes)
     const [contactBoxes, setContactBoxes] = useState(updatedContactData.formData)
 
 
-    const [navbarShow, setNavbarShow ] = useState(false)
+    // const [navbarShow, setNavbarShow ] = useState(false)
     const [bannerShow, setBannerShow ] = useState(false)
     const [workflowShow, setWorkflowShow ] = useState(false)
     const [featuresShow, setFeaturesShow] = useState(false)
@@ -133,7 +133,7 @@ const Editingpage = ({
             <main className='edditing-data'>
           
                {/* //NAVBAR */}
-                <form className='edit-navbar edit-section' onSubmit={e => mutateData(e, updateNavbar, updatdetNavData)}>
+                {/* <form className='edit-navbar edit-section' onSubmit={e => mutateData(e, updateNavbar, updatdetNavData)}>
                      <FormHeader text="navb" show={navbarShow} setShow={setNavbarShow} />
                      {navbarShow &&
                      <>
@@ -177,7 +177,7 @@ const Editingpage = ({
                      </>
                      }
                     
-                </form>
+                </form> */}
 
                 {/* BUNNER */}
                 <form className=' edit-section' onClick={e => mutateData(e, updateBanner, updatedBannerData)}>
