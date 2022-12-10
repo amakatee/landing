@@ -1,4 +1,6 @@
 $maincolor:rgb(0 12 43 / 5%);
+$formcolor:rgba(203, 213, 225, 0.064);;
+$babyblue: rgba(125, 212, 252, 0.377);
 .pricing-swiper {
     min-height: 60vh;
  
@@ -37,6 +39,10 @@ $maincolor:rgb(0 12 43 / 5%);
             box-shadow: rgb(0 12 43 / 5%) 0px 4px 8px;
             // box-shadow: 0 2px 6px 0 $maincolor;
             overflow: hidden;
+            background-color: $formcolor;
+            border-bottom: 1px solid $babyblue;
+            color: white;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);;
 
             .pricing-image {
                 margin-top: -20px;
@@ -104,3 +110,11 @@ $maincolor:rgb(0 12 43 / 5%);
 }
 
 
+
+
+.price-number {
+    background-color: $babyblue;
+    padding: .7em 1.7rem;
+    border-radius: 15px;
+    margin-top: 10px;
+}

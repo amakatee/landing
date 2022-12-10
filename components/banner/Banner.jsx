@@ -8,7 +8,7 @@ const chars2 = [ '不', '成', '器']
 const Banner = ({img, firstText, secondText,  formText, btnText}) => {
   console.log(secondText)
   return (
-    <main>
+    <main className='banner-main'>
       <div className='banner-layout'></div>
       {/* <div className='characters'>
         <div> {chars1.map(char => <spn>{char}</spn>)}</div>

@@ -20,7 +20,7 @@ $mainblue: "#1b2845";
 $lightblue: #77d2d2;
 // $darkback:#0c171b; 
 $typografydark: #1a1a1a;;
-$babyblue: #63A4FF;
+$darkblue: rgba(15, 23, 42, 0.982);
 $maincolor:#7a9584;
 
 
@@ -38,8 +38,8 @@ body {
     // font-family: Helvetica Neue;
     font-family: "Noto Sans Display","Noto Serif SC","Noto Serif TC",sans-serif;
     font-weight: 300;
-    background-color: white ;
-    color: $typografydark;
+    background-color:$darkblue ;
+    color: $darkblue;
 }
 
 html {
@@ -51,7 +51,7 @@ html {
   
   .layout {
     display: flex;
-    // gap: 5rem;
+    gap: 5rem;
     flex-direction: column;
     
     @include large() {
@@ -63,9 +63,11 @@ html {
 
 .footer {
     display: grid;
+    background-color: $darkblue;
     place-content: center;
     width: 100%;
     min-height: 8vh;
     padding-top: 3rem;
     padding-bottom: 1rem;
+    color: white;
 }

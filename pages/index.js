@@ -63,7 +63,7 @@ export default function Home(props) {
   //   initialData:props.navbarData
 
   // })
-  console.log(props)
+
   const queryClient = new QueryClient();
   const {data:BannerData} = useQuery({
     queryKey:['banner'],
@@ -116,7 +116,7 @@ export default function Home(props) {
   
   const {mutate: updateUserData} = useMutation(postUserFormData, {
     onSuccess: (data) => {
-      console.log(data)
+    
     }
   })
  

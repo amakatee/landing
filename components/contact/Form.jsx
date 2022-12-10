@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import Button from '../Button'
 
 const Form = ({formData, postFormData, submitForm, err}) => {
   const [inputs, setInputs] = useState({})
@@ -54,10 +55,10 @@ const Form = ({formData, postFormData, submitForm, err}) => {
         onChange={e => setCheck(e.target.checked)}
         />
       
-         <p>{formData[0].credentialsInput}</p>
+         <p className='credentials'>{formData[0].credentialsInput}</p>
       </label>
-      
-      <button className='nav-btn contact-btn' type='submit'>{formData[0].btnText}</button>
+      <Button  type='submit' btnText={formData[0].btnText}/>
+      {/* <button className='nav-btn contact-btn' type='submit'><p>{formData[0].btnText}</p></button> */}
       
       
     </form>

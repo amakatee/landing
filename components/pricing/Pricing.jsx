@@ -58,9 +58,12 @@ const Pricing = ({boxes, headerText}) => {
                    </div>
    
                    <p >{box.thirdText}</p>
+                   <div className='price-number'>
                    <p className='p-medium'>
                      {box.fourthText}
                    </p>
+                   </div>
+                  
                   </div>
                      
                      
@@ -77,9 +80,9 @@ const Pricing = ({boxes, headerText}) => {
 
          <div className='arrows-pricing'>
            <div  onClick={() => swiperRef.current.swiper.slidePrev()} > <HiArrowNarrowLeft size="30px"
-    color="black" /></div>
+    color="white" /></div>
            <div  onClick={() => swiperRef.current.swiper.slideNext()} ><HiArrowNarrowRight size="30px"
-    color="black"/></div>
+    color="white"/></div>
          </div>
 
       </div>

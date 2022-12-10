@@ -181,11 +181,11 @@ const Editingpage = ({
 
                 {/* BUNNER */}
                 <form className=' edit-section' onClick={e => mutateData(e, updateBanner, updatedBannerData)}>
-                    <FormHeader text="banner s" show={bannerShow} setShow={setBannerShow} />
+                    <FormHeader text="Первая секция(баннер):" show={bannerShow} setShow={setBannerShow} />
 
                     {bannerShow && 
                     <>
-                    <label ><p>Bunner First Text:</p>
+                    <label ><p>Первый текст(большой):</p>
                     <textarea
                     className='input-styles'
                     name='firstText'
@@ -194,12 +194,15 @@ const Editingpage = ({
                     value={updatedBannerData.firstText}
                     />
                     </label>
+                    <label><p>Второй текст:</p>
                     <textarea
                     className='input-styles'
                     name='secondText'
                     type='text'
                     onChange={(e) => handleArrayData(e, null, updatedBannerData, setUpdatedBannerData)}
                     value={updatedBannerData.secondText}/>
+                    </label>
+                    <label><p>Текст на кнопке:</p>
                      <input
                      className='input-styles'
                     name='btnText'
@@ -208,6 +211,7 @@ const Editingpage = ({
                     value={updatedBannerData.btnText}
 
                      />
+                      </label>
                      <button className='form-btns' type='submit'>Save </button>
                     </>
                     }
@@ -215,10 +219,10 @@ const Editingpage = ({
 
                 {/* WORKFLOW */}
                 <form className='edit-workflow edit-section' onClick={(e) =>mutateData(e, updateWorkflow, updatedWorkflowData)}>
-                <FormHeader text="workflow" show={workflowShow} setShow={setWorkflowShow} />
+                <FormHeader text="Вторая секция(Рабочее пространство):" show={workflowShow} setShow={setWorkflowShow} />
                   {workflowShow && 
                   <>
-                   <label><p> header Text:</p>
+                   <label><p> Заголовок:</p>
                    <input 
                     className='input-styles'
                     name='headerText'
@@ -229,12 +233,12 @@ const Editingpage = ({
                    </label>
                    
 
-                    <button className='form-btns' onClick={() => addInputField(workflowBoxes, setWorkflowBoxes,updatedWorkflowData, setUpdateWorkflowData)}>Add Box Data</button>
+                    <button className='form-btns' onClick={() => addInputField(workflowBoxes, setWorkflowBoxes,updatedWorkflowData, setUpdateWorkflowData)}>Добавить контейнер</button>
                     {workflowBoxes?.map((box, index) => {
                  
                         return (
-                            <div key={index}>
-                                <label> headerBoxText:
+                            <div className='box-label' key={index}>
+                                <label> <p>Заголовок Контейнера:</p>
                                     <input 
                                     className='input-styles'
                                     name='headerText'
@@ -244,7 +248,7 @@ const Editingpage = ({
                                     />
 
                                 </label>
-                                <label><p>Text:</p>
+                                <label><p>Основной текст контейнера:</p>
                                 <textarea 
                                 className='input-styles'
                                 name='text'
@@ -255,18 +259,18 @@ const Editingpage = ({
                                 </label>
                                 
                                 <button className='form-btns' onClick={() => removeInput(index, workflowBoxes, setWorkflowBoxes, updatedWorkflowData, setUpdateWorkflowData)}
-                                >delete</button>
+                                >Удалить контейнер</button>
                         </div>
                         )
                     })}
-                    <button className='form-btns' type='submit'>Save Workflow</button>
+                    <button className='form-btns' type='submit'>Сохранить изменения в сеции 2</button>
                   </>
                   }
                 </form>
 
 
                 {/* FEATURES */}
-                <form className='edit-features edit-section' onClick={e => mutateData(e, updateFeatures, updatedFeaturesData)}>
+                {/* <form className='edit-features edit-section' onClick={e => mutateData(e, updateFeatures, updatedFeaturesData)}>
                    <FormHeader text="features" show={featuresShow} setShow={setFeaturesShow} />
 
                     {featuresShow && 
@@ -316,14 +320,14 @@ const Editingpage = ({
                     <button className='form-btns' type="submit">Save Features</button>
                     </>
                     }
-                </form>
+                </form> */}
 
                 {/* PRICING */}
                 <form className='edit-pricing edit-section' onSubmit={(e) => mutateData(e, updatePricing, updatedPricingData)}>
-                   <FormHeader text="pricing" show={pricingShow} setShow={setPricingShow} />
+                   <FormHeader text="Третья сейкция:" show={pricingShow} setShow={setPricingShow} />
                    {pricingShow && 
                    <>
-                    <label><p>Header:</p>
+                    <label><p>Заголовок:</p>
                     <input
                     className='input-styles'
                     name='headerText'
@@ -332,10 +336,11 @@ const Editingpage = ({
                     onChange={e => handleArrayData(e, null, updatedPricingData, setUpdatedPricingData)} 
                      />
                     </label>
-                     <button className='form-btns' onClick={() => addInputField(pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Add new Pricing</button>
+                     <button className='form-btns' onClick={() => addInputField(pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Добавить контейнер</button>
                      {pricingBoxes.map((box, index) => (
-                         <div className='boxes-cont'>
-                             <label> first Text
+                   
+                         <div  className='boxes-cont box-label'>
+                             <label> <p>Первый текст:</p>
                              <textarea
                              className='input-styles'
                              name='firstText'
@@ -344,7 +349,7 @@ const Editingpage = ({
                              onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
                               />
                               </label>
-                              <label> second Text
+                              <label> <p>Второй текст:</p>
                              <textarea
                              className='input-styles'
                              name='secondText'
@@ -353,7 +358,7 @@ const Editingpage = ({
                              onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
                               />
                               </label>
-                              <label> third Text
+                              <label> <p>Третий текст:</p>
                              <textarea
                              className='input-styles'
                              name='thirdText'
@@ -362,7 +367,7 @@ const Editingpage = ({
                              onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
                               />
                               </label>
-                              <label> fourthText 
+                              <label> <p>Четвертый текст:</p> 
                              <textarea
                              className='input-styles'
                              name='fourthText'
@@ -371,11 +376,11 @@ const Editingpage = ({
                              onChange={(e) => handleArrayText(e, index ,pricingBoxes, setPricingBoxes )}
                               />
                               </label>
-                              <button className='form-btns' onClick={() => removeInput(index,pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Delete</button>
+                              <button className='form-btns' onClick={() => removeInput(index,pricingBoxes, setPricingBoxes, updatedPricingData, setUpdatedPricingData)}>Удалить контейнер</button>
                          </div>
                      ))}
 
-                    <button className='form-btns' type='submit'>Submit Pricign Data</button>
+                    <button className='form-btns' type='submit'>Сохранить изменения в 3 сеции</button>
                    </>
                    }
 
@@ -383,11 +388,11 @@ const Editingpage = ({
 
                 {/* CONTACT */}
                 <form  className='edit-contact edit-section' onSubmit={(e) => mutateData(e, updateContact, updatedContactData)}>
-                <FormHeader text="contact" show={contactShow} setShow={setContactShow} />
+                <FormHeader text="Четвертая секция(Форма Связи):" show={contactShow} setShow={setContactShow} />
                 {contactShow && 
                 <>
 
-                   <label> Header:
+                   <label> <p>Заголовок:</p>
                     <input 
                     name='headerText'
                     className='input-styles'
@@ -399,7 +404,7 @@ const Editingpage = ({
                     </label>
                     {contactBoxes.map((box, index) => (
                         <div className='boxes-cont' key={index} >
-                            <label> FirstInput:
+                            <label> <p>Первый текст(Имя): </p>
                             <input
                             className='input-styles'
                             name='firstInput'
@@ -409,7 +414,7 @@ const Editingpage = ({
 
                              />
                         </label>
-                        <label> SecondInput:
+                        <label> <p>Второй текст(мэйл/телефон):</p>
                             <input
                             className='input-styles'
                             name='secondInput'
@@ -419,7 +424,7 @@ const Editingpage = ({
 
                              />
                         </label>
-                        <label> thirdInput:
+                        <label> <p>Четвертый текст(сообщение):</p>
                             <input
                             name='thirdInput'
                             className='input-styles'
@@ -429,7 +434,7 @@ const Editingpage = ({
 
                              />
                         </label>
-                        <label> credentialsInput:
+                        <label> <p>Пользовательское соглашение:</p>
                             <input
                             name='credentialsInput'
                             className='input-styles'
@@ -439,7 +444,7 @@ const Editingpage = ({
 
                              />
                         </label>
-                        <label> btnTextInput:
+                        <label><p>Текст кнопки:</p>
                             <input
                             className='input-styles'
                             name='btnText'
@@ -452,7 +457,7 @@ const Editingpage = ({
                         </div>
                     ))}
 
-                    <button className='form-btns'  type='submit'>Save Contact</button>
+                    <button className='form-btns'  type='submit'>Сохранить форму обратной связи</button>
                 </>
                 }
                     

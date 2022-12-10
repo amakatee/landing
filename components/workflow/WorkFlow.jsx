@@ -9,7 +9,7 @@ const WorkFlow = ({headerText, boxes}) => {
             {boxes?.map((box, i) => (
              <div key={i} className='flow-box'>
                <div className='icon-img'>
-               <img src='circle.png'/>
+               <img src='icon.png'/>
                </div>
                
                 
@@ -20,7 +20,7 @@ const WorkFlow = ({headerText, boxes}) => {
              </div>
             ))}
         </div>
-        <div className='palette'>hello</div>
+        {/* <div className='palette'>hello</div> */}
     </main>
   )
 }

@@ -1,1 +1,11 @@
+$darkblue: rgba(15, 23, 42, 0.982);
 
+.contact-section{
+    background-color:$darkblue ;
+   
+     border-top-left-radius: 20px;
+     border-top-right-radius: 20px;
+    :nth-child(1){
+        color: white;
+    }
+}
