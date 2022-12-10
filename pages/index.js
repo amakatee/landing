@@ -129,7 +129,7 @@ export default function Home(props) {
   return (
     <Layout  >
       {/* <Navbar logo={NavbarData?.logo} list={NavbarData?.list} btnText={NavbarData?.btnText}/> */}
-      <Banner img={props?.bannerData?.img} firstText={props?.bannerData?.firstText} secondText={props?.bannerData?.secondText} formText={props?.bannerData?.formText} btnText={props?.bannerData?.btnText} />
+      <Banner img={BannerData?.img} firstText={BannerData?.firstText} secondText={BannerData?.secondText} formText={BannerData?.formText} btnText={BannerData?.btnText} />
       <WorkFlow headerText={props?.workflowData?.headerText} boxes={props?.workflowData?.boxes}/>
       {/* <KeyFeature headerText={FeaturesData?.headerText}  boxes={FeaturesData?.boxes}/> */}
       <Pricing boxes={props?.pricingData?.boxes} headerText={props?.pricingData?.headerText}/>
