@@ -1,6 +1,10 @@
 .main-workflow {
-    background-color: rgba(125, 212, 252, 0.195);
+    background-color: rgb(229, 238, 242);
     padding-block: 3rem;
+    margin-top: -2rem;
+    z-index: 4;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
  
     :nth-child(1){
         margin-bottom: 5rem;

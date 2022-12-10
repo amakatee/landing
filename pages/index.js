@@ -23,7 +23,7 @@ import { useQuery } from '@tanstack/react-query';
 import Navbar from '../components/navbar/Navbar'
 
 
-export async  function getInitialProps() {
+export async  function getStaticProps() {
 
   const navbarData = await getNavbarData()
   const bannerData = await getBannerData()
@@ -63,6 +63,7 @@ export default function Home(props) {
   //   initialData:props.navbarData
 
   // })
+  console.log(props)
   const queryClient = new QueryClient();
   const {data:BannerData} = useQuery({
     queryKey:['banner'],
@@ -128,7 +129,7 @@ export default function Home(props) {
   return (
     <Layout  >
       {/* <Navbar logo={NavbarData?.logo} list={NavbarData?.list} btnText={NavbarData?.btnText}/> */}
-      <Banner img={BannerData?.img} firstText={BannerData?.firstText} secondText={BannerData?.secondText} formText={BannerData?.formText} btnText={BannerData?.btnText} />
+      <Banner img={props?.bannerData?.img} firstText={props?.bannerData?.firstText} secondText={props?.bannerData?.secondText} formText={props?.bannerData?.formText} btnText={props?.bannerData?.btnText} />
       <WorkFlow headerText={WorkFlowData?.headerText} boxes={WorkFlowData?.boxes}/>
       {/* <KeyFeature headerText={FeaturesData?.headerText}  boxes={FeaturesData?.boxes}/> */}
       <Pricing boxes={pricingData?.boxes} headerText={pricingData?.headerText}/>
