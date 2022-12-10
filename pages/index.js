@@ -64,61 +64,61 @@ export default function Home(props) {
 
   // })
   console.log(props)
-  const queryClient = new QueryClient();
-  const {data:BannerData} = useQuery({
-    queryKey:['banner'],
-    queryFn: getBannerData,
-    initialData:props.bannerData
+  // const queryClient = new QueryClient();
+  // const {data:BannerData} = useQuery({
+  //   queryKey:['banner'],
+  //   queryFn: getBannerData,
+  //   initialData:props.bannerData
 
-  })
-  const {data:WorkFlowData} = useQuery({
-    queryKey:['workflow'],
-    queryFn: getWorkflowData,
-    initialData:props.workflowData
+  // })
+  // const {data:WorkFlowData} = useQuery({
+  //   queryKey:['workflow'],
+  //   queryFn: getWorkflowData,
+  //   initialData:props.workflowData
 
-  })
-  const {data:FeaturesData} = useQuery({
-    queryKey:['features'],
-    queryFn: getFeaturesData,
-    initialData:props.featuresData
+  // })
+  // const {data:FeaturesData} = useQuery({
+  //   queryKey:['features'],
+  //   queryFn: getFeaturesData,
+  //   initialData:props.featuresData
 
-  })
-  const {data:pricingData} = useQuery({
-    queryKey:['pricing'],
-    queryFn: getPricingData,
-    initialData:props.pricingData
+  // })
+  // const {data:pricingData} = useQuery({
+  //   queryKey:['pricing'],
+  //   queryFn: getPricingData,
+  //   initialData:props.pricingData
 
-  })
+  // })
 
-  const {data:contactData} = useQuery({
-    queryKey:['contact'],
-    queryFn: getContactData,
-    initialData:props.contactData
+  // const {data:contactData} = useQuery({
+  //   queryKey:['contact'],
+  //   queryFn: getContactData,
+  //   initialData:props.contactData
 
-  })
+  // })
 
-  const {data:userFormData} = useQuery({
-    queryKey:['userFormData'],
-    queryFn: getUserFormData,
-    initialData:props.userFormData
+  // const {data:userFormData} = useQuery({
+  //   queryKey:['userFormData'],
+  //   queryFn: getUserFormData,
+  //   initialData:props.userFormData
 
-  })
-   console.log(userFormData)
+  // })
+  //  console.log(userFormData)
 
    
  
 
-  const {mutate:updateForm} = useMutation(updatedUserData, {
-    onSuccess: (data) => {
-      queryClient.setQueriesData(['userFormData', userFormData.id], data)
-    }
-  })
+  // const {mutate:updateForm} = useMutation(updatedUserData, {
+  //   onSuccess: (data) => {
+  //     queryClient.setQueriesData(['userFormData', userFormData.id], data)
+  //   }
+  // })
   
-  const {mutate: updateUserData} = useMutation(postUserFormData, {
-    onSuccess: (data) => {
-      console.log(data)
-    }
-  })
+  // const {mutate: updateUserData} = useMutation(postUserFormData, {
+  //   onSuccess: (data) => {
+  //     console.log(data)
+  //   }
+  // })
  
  
 

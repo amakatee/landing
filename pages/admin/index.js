@@ -130,7 +130,8 @@ const index = (props) => {
 
   return (
     <main className='admin-page'>
-        <button className='logout-btn'>log out</button>
+      admin page
+        {/* <button className='logout-btn'>log out</button>
         <br />
         <div className='admin-boxes'>
      
@@ -185,9 +186,7 @@ const index = (props) => {
           
 
         </section>
-       
-        
-      }
+     } */}
    
     </main>
   )
