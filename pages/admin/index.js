@@ -96,6 +96,7 @@ const index = (props) => {
   
   const {mutate:updateBanner} = useMutation(updatetBannerData, {
     onSuccess: (data) => {
+      console.log("success")
       queryClient.setQueriesData(['banner', BannerData.id], data)
     }
   })
@@ -165,14 +166,14 @@ const index = (props) => {
             // navbarData={NavbarData}
             updateNavbar={updateNavbar}
             updateBanner={updateBanner}
-            bannerData={props?.bannerData}
-            workflowData={props?.workflowData}
+            bannerData={BannerData}
+            workflowData={WorkflowData}
             updateWorkflow={updateWorkflow}
             featuresData={props?.featuresData}
             updateFeatures={updateFeatures}
-            pricingData={props?.pricingData}
+            pricingData={PricingData}
             updatePricing={updatePricing}
-            contactData={props?.contactData}
+            contactData={ContactData}
             updateContact={updateContact}
             
          
