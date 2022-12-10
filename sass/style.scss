@@ -51,7 +51,7 @@ html {
   
   .layout {
     display: flex;
-    gap: 5rem;
+    // gap: 5rem;
     flex-direction: column;
     
     @include large() {

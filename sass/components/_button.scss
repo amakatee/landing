@@ -26,10 +26,13 @@ $typografydark: #17263b;
 
 .nav-btn {
     outline: none;
-    border: 1px solid $maincolor;
-    color: $maincolor;
+    border: 1px solid rgba(255, 255, 255, 0.256);
+
+    color: rgba(125, 212, 252, 0.671);
     cursor:pointer ;
-  
+    background-color: rgba(125, 212, 252, 0.671);
+    background-color: rgba(148, 163, 184, 0.14);
+    backdrop-filter: blur(.1rem);
     font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: .1px;
