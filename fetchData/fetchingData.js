@@ -1,11 +1,11 @@
 import axios from 'axios'
-const BASE_URL='http://localhost:3000/api'
+
 
 export default axios.create({
    
 })
 const axiosBase = axios.create({
-    baseURL:'http://localhost:3000/api',
+    baseURL:`${process.env.BASE_URL}/api`,
     credentials: "include"
   });
 //navbar
